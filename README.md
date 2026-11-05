@@ -1,100 +1,219 @@
 <div align="center">
-  <img src="frontend/public/ui/saer-logo.png" width="180" alt="Saer logo: a white car and the Arabic name سعّر on a blue background">
-  <h1>🚗 Saer | سعّر</h1>
-  <p><strong>Know the car. Understand the price.</strong></p>
-  <p>Estimate car prices, identify vehicles from photos, and explore historical listings.<br>An Arabic-first graduation project built around practical machine learning.</p>
-  <p>
-    <img src="https://img.shields.io/badge/UI-Arabic%20RTL-1F609E?style=flat-square" alt="Interface: Arabic, right-to-left">
-    <img src="https://img.shields.io/badge/Runtime-Python%203.12-143B63?style=flat-square" alt="Model runtime: Python 3.12">
-    <img src="https://img.shields.io/badge/Data-Historical-E5AB36?style=flat-square" alt="Data: historical advertisements">
-  </p>
-  <p>
-    <a href="https://saer-rmsavg637.pages.dev/?api=https%3A%2F%2Fgigantic-jolliness-stamina.ngrok-free.dev"><img src="https://img.shields.io/badge/Explore_Saer-Live_Demo-087FC4?style=for-the-badge" alt="Open the Saer live demo"></a>
-  </p>
-  <h3><a href="https://saer-rmsavg637.pages.dev/?api=https%3A%2F%2Fgigantic-jolliness-stamina.ngrok-free.dev">🌐 Explore the Live Demo →</a></h3>
-  <p><a href="#features">✨ Features</a> · <a href="#quick-start">🚀 Quick Start</a> · <a href="#team">👥 Team</a> · <a href="#documentation">📚 Documentation</a></p>
+
+<img src="frontend/public/ui/saer-logo.png" alt="شعار سعّر" width="112" />
+
+# سعّر | SAER
+
+**من صورة سيارة أو مواصفاتها… إلى تقدير مدعوم بالبيانات.**
+
+منصة عربية تجريبية لتقدير أسعار إعلانات السيارات المستعملة، والتعرّف على الماركة والموديل، واستكشاف بيانات سوق السيارات السعودي.
+
+<br>
+
+<img src="docs/assets/readme-hero.svg" width="100%" alt="SAER — illustration of a car and verified project statistics: 2,742 advertisements, 13,416 image records, six Saudi cities, and three model paths" />
+
+<br>
+
+<a href="https://saer-rmsavg637.pages.dev/"><img alt="Explore the interface" src="https://img.shields.io/badge/🌐_استكشف_المنصة-OPEN_DEMO-13BCE8?style=for-the-badge&labelColor=10233F" /></a>
+<a href="docs/SETUP.md"><img alt="Setup instructions" src="https://img.shields.io/badge/⚙️_التشغيل-SETUP_GUIDE-256AB0?style=for-the-badge&labelColor=10233F" /></a>
+<a href="#-نتائج-النماذج--model-results"><img alt="Model evaluation" src="https://img.shields.io/badge/📈_نتائج_النماذج-TEST_METRICS-17A398?style=for-the-badge&labelColor=10233F" /></a>
+
+<br>
+
+<img src="https://img.shields.io/badge/React-19-149EDE?style=flat-square&logo=react&logoColor=white" alt="React 19" />
+<img src="https://img.shields.io/badge/TypeScript-7-3178C6?style=flat-square&logo=typescript&logoColor=white" alt="TypeScript 7" />
+<img src="https://img.shields.io/badge/Python-3.12-326C9E?style=flat-square&logo=python&logoColor=white" alt="Python 3.12" />
+<img src="https://img.shields.io/badge/Arabic-RTL-18B4B7?style=flat-square" alt="Arabic RTL interface" />
+<img src="https://img.shields.io/badge/Academic-Research-263C5C?style=flat-square" alt="Academic research project" />
+
+<br>
+
+[**الواجهة**](#-واجهة-سعر) · [**البيانات**](#-بيانات-المشروع--data-at-a-glance) · [**نتائج النماذج**](#-نتائج-النماذج--model-results) · [**كيف يعمل؟**](#-كيف-يعمل-سعر) · [**التشغيل**](#-quick-start) · [**الفريق**](#-فريق-التطوير--the-team)
+
 </div>
 
-> 🌐 **Try Saer:** Open the demo above and choose guest access. The link selects the external model service; predictions require its server and tunnel to remain running. Local model verification does not guarantee availability of every live flow. The deployed interface may differ from the latest `main`.
+> [!IMPORTANT]
+> **نسخة أكاديمية تجريبية، وليست خدمة تسعير تجارية.** جميع بيانات الإعلانات تاريخية، ونتائج النماذج تقديرية وليست أسعار بيع مضمونة. يعمل الرابط المنشور كواجهة ثابتة على Cloudflare Pages؛ أما التنبؤات فتتطلب خدمة Python منفصلة قيد التشغيل. قد تختلف نسخة الموقع المنشورة عن آخر تحديث في هذا المستودع.
 
-![Saer home screen with six Arabic service cards and a blue cityscape](docs/assets/home-screen.jpg)
+---
 
-Saer brings vehicle exploration and price estimation into one Arabic, right-to-left interface. Browse recorded advertisements, compare cars, narrow a budget, or run the locally verified models with a vehicle photo or its specifications. Estimates refer to asking prices in the training data—not guaranteed sale prices.
+## ✦ الفكرة في سطر واحد
 
-<details>
-<summary><strong>See the listings explorer and market dashboard</strong></summary>
+بدل الانتقال بين إعلانات كثيرة لمقارنة السيارات وأسعارها، يجمع **سعّر** الاستكشاف والتصفية والمقارنة والتحليل ومسارات التنبؤ في واجهة واحدة مصممة بالعربية ومن اليمين إلى اليسار.
 
-**Historical listings explorer** — a real filter applied to the bundled sample listing. The displayed amount is a recorded asking price, not a prediction.
+<a id="-واجهة-سعر"></a>
+## 🖥️ واجهة سعّر
 
-![Saer listings explorer filtered to a 2020 Toyota Camry, showing the bundled sample photo](docs/assets/listings-screen.jpg)
+<div align="center">
+  <img src="docs/assets/home-screen.jpg" width="100%" alt="لقطة حقيقية من الصفحة الرئيسية لسعّر بست خدمات" />
+  <sub>لقطة فعلية من التطبيق المحلي على main بتاريخ 2 نوفمبر 2026 — ليست نموذج تصميم تخيليًا.</sub>
+</div>
 
-**Market analysis** — descriptive summaries and charts computed from historical advertisement data.
+<br>
 
-![Saer market dashboard with historical price summaries, distributions, and model comparisons](docs/assets/market-screen.jpg)
+<table>
+<tr>
+<td width="50%" align="center"><strong>استعراض الإعلانات</strong><br><sub>بحث وتصفية داخل مجموعة الإعلانات التاريخية</sub><br><img src="docs/assets/listings-screen.jpg" width="100%" alt="صفحة استعراض الإعلانات" /></td>
+<td width="50%" align="center"><strong>تحليل السوق</strong><br><sub>مؤشرات ورسوم وصفية للبيانات المسجلة</sub><br><img src="docs/assets/market-screen.jpg" width="100%" alt="لوحة تحليل السوق" /></td>
+</tr>
+</table>
 
-</details>
+<sub>تفاصيل ومصدر اللقطات: [توثيق الصور](docs/assets/README.md). الأسعار المعروضة في الإعلانات أسعار طلب مسجلة وليست نتائج تنبؤ.</sub>
 
-*These are actual screenshots of the local application on `main`, not design mockups or proof of live model hosting. [Capture details](docs/assets/README.md).*
+---
 
-<a name="features"></a>
+<a id="-بيانات-المشروع--data-at-a-glance"></a>
+## 📊 بيانات المشروع | Data at a glance
 
-## ✨ Features
+<div align="center">
+<table>
+<tr>
+<td align="center" width="25%"><h2>2,742</h2><sub>إعلان سيارة تاريخي</sub></td>
+<td align="center" width="25%"><h2>13,416</h2><sub>سجل صورة في البيانات</sub></td>
+<td align="center" width="25%"><h2>6</h2><sub>مدن سعودية</sub></td>
+<td align="center" width="25%"><h2>2018–2026</h2><sub>سنوات الموديلات الممثلة</sub></td>
+</tr>
+</table>
+</div>
 
-| Feature | What you can do | Data / runtime |
-|---|---|---|
-| **💰 Specification-Based Price Estimation** | Enter vehicle details to estimate an asking price in SAR. | Local model service |
-| **📷 Image-Based Price Estimation** | Upload a car photo for an experimental price estimate and prediction ranges. | Local model service |
-| **🎯 Budget-Based Recommendations** | Find up to five distinct model choices within a budget. | Historical listings |
-| **⚖️ Car Comparison** | Compare recorded vehicle attributes and advertised prices side by side. | Historical listings |
-| **📊 Market Analysis** | Explore descriptive price summaries by make, model, year, and city. | Historical listings |
-| **🔎 Historical Listings Explorer** | Search and filter the project’s saved advertisements. | Historical listings |
+<img src="docs/assets/readme-data.svg" width="100%" alt="توزيع 2742 إعلانًا تاريخيًا: الرياض 1818، القريات 397، جدة 335، الدمام 184، المدينة 5، نجران 3" />
 
-**Two photo paths, two different purposes.** Vehicle identification suggests a make and model for the specification-based flow. The user confirms that suggestion and completes fields such as year and mileage before pricing. Direct image-to-price estimation is a separate model; it does not infer mileage or mechanical condition.
+| المدينة | عدد الإعلانات | نسبة المجموعة الكاملة |
+|:---|---:|---:|
+| الرياض | **1,818** | **66.3%** |
+| القريات | 397 | 14.5% |
+| جدة | 335 | 12.2% |
+| الدمام | 184 | 6.7% |
+| المدينة المنورة | 5 | 0.2% |
+| نجران | 3 | 0.1% |
+| **الإجمالي** | **2,742** | **100%** |
 
-## 🧠 Models & Data
+<sub>حُسبت النسب من أعداد المدن الواردة في عرض المشروع، وقد تختلف نسب مجموعات التدريب الفرعية عن إجمالي الإعلانات. الأرقام تقريبية إلى منزلة عشرية واحدة.</sub>
 
-The table below describes the **saved runtime artifacts**, rather than the alternative architectures proposed in early planning documents.
+**كيف جُهزت عينة التسعير؟**
 
-| Model | Actual architecture | Input → output | Runtime requirement |
-|---|---|---|---|
-| **Specification price** | `HistGradientBoostingRegressor` with an `OrdinalEncoder` and the project’s feature preprocessing | Vehicle specifications → experimental asking-price estimate in SAR | Main Python environment; scikit-learn **1.9.1** |
-| **Vehicle identity** | Frozen **DINOv2 ViT-S/14 + CLIP ViT-B/32** features; `StandardScaler` + `LogisticRegression`, with 59 joint make/model classes | One photo → joint make/model suggestion and uncalibrated scores | Main environment + restored public encoders and detection support weights |
-| **Image price** | Three-regressor **SVR / Ridge ensemble** over frozen **DINOv2 S/B/L + CLIP ViT-B/16** embeddings | Vehicle photo(s) → experimental SAR estimate and 80% / 90% prediction ranges | Separate image-worker environment; scikit-learn **1.6.1** + restored encoders |
-
-- **2,742 historical advertisements** and **13,416 image records** are included as structured data.
-- The repository bundles **one original dataset photo**. Image records are metadata; the complete advertisement photo collection is **not included**. Most local demo listings use a placeholder. [Sample scope](docs/SAMPLE_IMAGES.md).
-- The three approved runtime artifacts total **5.64 MiB**. Public pretrained encoder weights are separate—about **2.72 GiB**—and must be restored. [Artifacts](docs/runtime-assets.json) · [Encoder inventory](docs/PUBLIC_ENCODERS.md).
-
-Evaluation is retrospective and does not establish external-market accuracy. A sample prediction is not an accuracy metric, and an identity score is not calibrated confidence. See the [image-price evaluation and provenance](models/image_price_current.json), [identity selection and caveats](models/identity_current.json), and [tabular validation metadata](models/improvement_20261021T093545513846/price/selected.json).
-
-## 🏗️ How It Fits Together
-
-| Layer | Technology |
-|---|---|
-| Interface | React · TypeScript · Vite · Arabic RTL |
-| Model services | Python · FastAPI REST · Gradio |
-| Machine learning | scikit-learn · PyTorch · torchvision · Transformers |
-| Data | SQLite · CSV · static JSON exports |
-| Published demo | Cloudflare Pages, using Direct Upload for static assets |
-
-```mermaid
-flowchart TB
-    subgraph Published["Published static demo"]
-        Visitor["Visitor's browser"] --> Pages["Cloudflare Pages — UI + historical data"]
-    end
-    subgraph Local["Locally verified runtime"]
-        UI["Local React interface"] --> API["Python service — Gradio / FastAPI"]
-        API --> Specs["Specifications — to price"]
-        API --> Identity["Photo to — make / model"]
-        API --> ImagePrice["Photo — to price"]
-    end
-    %% Invisible layout link, not a service connection.
-    Pages ~~~ UI
+```text
+2,742  إعلانات تاريخية
+  │
+  ├── استبعاد 438 سيارة جديدة (خارج نطاق المستعمل)
+  ├── استبعاد  11 سيارة بممشى غير معتاد
+  ▼
+2,293  إعلانًا في مجموعة السعر
+  │
+  ├── تدريب   1,591
+  ├── تحقق      357
+  └── اختبار    345
 ```
 
-Cloudflare serves the static demo; it does **not** run Python or the models. Demo-mode UI inference uses Gradio. REST endpoints are also available for direct verification. The live-demo link supplies an external model-service URL through `?api=`. Its availability depends on the running model server and tunnel; this README update does not claim a new end-to-end inference test.
+> [!NOTE]
+> **13,416** تمثل سجلات الصور في البيانات، **وليست** 13,416 ملف صورة متاحًا للتنزيل من المستودع. المستودع العام يحتوي صورة إعلان أصلية واحدة ضمن العينة، مع ملفات صور خاصة بالتصميم والواجهة. راجع [حدود صور العينة](docs/SAMPLE_IMAGES.md).
 
-<a name="quick-start"></a>
+---
+
+<a id="-نتائج-النماذج--model-results"></a>
+## 🧠 نتائج النماذج | Model results
+
+تتكون المنصة من **3 مسارات نمذجة مستقلة**: تقدير السعر من المواصفات، وتقدير السعر من الصورة، واقتراح هوية السيارة. هذه النتائج **داخلية/تاريخية** وليست اختبارًا خارجيًا على السوق الحالي.
+
+<table>
+<tr>
+<td width="33%" valign="top">
+<h3>01 · من المواصفات</h3>
+<p><strong>HistGradientBoostingRegressor</strong></p>
+<p>مدخلات مثل الماركة والموديل والسنة والممشى والفئة والمدينة وناقل الحركة ونوع الوقود.</p>
+<p><strong>R² = 0.8750</strong><br><strong>MAE ≈ 13,088.80 ر.س</strong></p>
+<sub>وفق مقاييس العرض الأكاديمي المرفق؛ ليست هذه القيم اختبارًا خارجيًا جديدًا.</sub>
+</td>
+<td width="33%" valign="top">
+<h3>02 · من صورة</h3>
+<p><strong>DINOv2 + CLIP</strong><br>مع SVR / Ridge ensemble</p>
+<p><strong>10.66%</strong><br>Median absolute percentage error</p>
+<p><strong>15,910.23 ر.س</strong><br>MAE على عينة اختبار تاريخية</p>
+<sub>345 إعلانًا / 1,670 صورة في اختبار النموذج المحفوظ.</sub>
+</td>
+<td width="33%" valign="top">
+<h3>03 · هوية السيارة</h3>
+<p><strong>DINOv2 + CLIP</strong><br>مع Logistic Regression</p>
+<p><strong>94.58%</strong><br>Top-1 على الاختبار التاريخي</p>
+<p><strong>59 فئة</strong><br>مشتركة للماركة والموديل</p>
+<sub>تُعرض الهوية كمقترح يتطلب تأكيد المستخدم.</sub>
+</td>
+</tr>
+</table>
+
+### دقة نموذج السعر من الصورة — على الاختبار التاريخي
+
+| المؤشر | القيمة | التفسير |
+|:---|---:|:---|
+| **MedAPE** | **10.66%** | وسيط نسبة الخطأ المطلق |
+| **MAE** | **15,910.23 ر.س** | متوسط الخطأ المطلق بالريال |
+| **R²** | **0.8476** | جودة الملاءمة على مجموعة الاختبار المحددة |
+| ضمن ±10% | **47.25%** | نسبة التقديرات ضمن 10% من السعر المسجل |
+| ضمن ±20% | **75.94%** | نسبة التقديرات ضمن 20% |
+| ضمن ±30% | **88.12%** | نسبة التقديرات ضمن 30% |
+
+```text
+ضمن ±10%   █████████░░░░░░░░░░░   47.25%
+ضمن ±20%   ███████████████░░░░░   75.94%
+ضمن ±30%   ██████████████████░░   88.12%
+```
+
+<sub>المصدر: [مؤشرات النموذج المعتمد لتسعير الصور](models/image_price_current.json) و[مؤشرات نموذج اقتراح الهوية](models/identity_current.json). كانت مجموعة الاختبار التاريخية معروفة في مراحل التطوير؛ لا تعني هذه النتائج دقة مؤكدة على بيانات جديدة أو أسعار البيع الفعلية. قيم نموذج المواصفات من العرض الأكاديمي، وتفاصيل التحقق المرفقة به.</sub>
+
+### مثال تشغيل محلي موثق — وليس معدل دقة
+
+| المسار | مثال النتيجة |
+|:---|:---|
+| السعر من المواصفات | **80,013.91 ر.س** |
+| السعر من الصورة | **87,053.29 ر.س** |
+| التعرف على المركبة | **Toyota Camry** |
+
+هذه أمثلة لطلبات اختبار محلية محفوظة في [تقرير التحقق](docs/UNIFICATION_VERIFICATION.json). **لا** تُستخدم لإثبات صحة جميع التنبؤات أو اتصال نموذج بموقع Cloudflare المنشور.
+
+---
+
+## 🚀 إمكانات المنصة
+
+| الميزة | ماذا تقدّم؟ |
+|:---|:---|
+| 💰 **تقدير سعر السيارة من المواصفات** | مدخلات منظمة ← سعر إعلان تقديري بالريال |
+| 📷 **تقدير السعر من الصورة** | رفع صورة ← تقدير تجريبي ونطاقات تنبؤ |
+| 🚘 **التعرّف على الماركة والموديل** | اقتراح هوية السيارة من صورة مع تأكيد المستخدم |
+| 🔎 **استعراض الإعلانات** | البحث والتصفية في البيانات التاريخية |
+| 🎯 **اقتراح سيارات حسب الميزانية** | عرض ما يصل إلى 5 خيارات بحسب الميزانية |
+| ⚖️ **مقارنة سيارتين** | مقارنة المواصفات وأسعار الطلب المسجلة |
+| 📈 **تحليل السوق** | مؤشرات ورسوم وصفية للعينة التاريخية |
+
+---
+
+## 🏗️ كيف يعمل سعّر؟
+
+```mermaid
+flowchart LR
+    A["المستخدم · واجهة RTL"] --> B["React + TypeScript"]
+    B --> C["البيانات التاريخية · JSON / SQLite"]
+    B -. "عند تشغيل الخدمة" .-> D["Python · FastAPI / Gradio"]
+    D --> E["01 · تسعير المواصفات"]
+    D --> F["02 · تسعير الصورة"]
+    D --> G["03 · التعرف على السيارة"]
+    E --> B
+    F --> B
+    G --> B
+```
+
+| الطبقة | التقنيات المستخدمة |
+|:---|:---|
+| **Frontend** | React 19 · TypeScript · Vite · Arabic RTL |
+| **Model API** | Python 3.12 · FastAPI · Gradio |
+| **Machine Learning** | scikit-learn · PyTorch · Transformers |
+| **Data** | SQLite · CSV · JSON |
+| **Static hosting** | Cloudflare Pages |
+
+**حدود النشر:** Cloudflare Pages يستضيف الواجهة والملفات الثابتة فقط، وليس أوزان النماذج أو خدمة Python. تشغيل التنبؤ يتطلب إعداد الخدمة بشكل مستقل، وقد لا يكون متاحًا على الرابط العام في كل وقت.
+
+---
+
+<a id="-quick-start"></a>
 
 ## 🚀 Quick Start
 
@@ -110,7 +229,7 @@ Copy-Item frontend/.env.example frontend/.env.local
 pnpm --dir frontend dev
 ```
 
-Open **http://127.0.0.1:5173** and choose guest access. Historical browsing does not require a model server. Repository access is required while the repository is private.
+Open **http://127.0.0.1:5173** and choose guest access. Historical browsing does not require a model server. The public repository can be cloned without an invitation.
 
 ### 2. Enable local model inference
 
@@ -138,13 +257,13 @@ The first encoder restore needs internet access and disk space. After restoratio
 
 <a name="team"></a>
 
-## 👥 The Team
+## 👥 فريق التطوير | The Team
 
 - ريان القحطاني
 - محمد ال حمود
 - عبد الرحمن الاسمري
 
-## 🗂️ Repository Guide
+## 🗂️ دليل المستودع | Repository Guide
 
 | Path | Purpose |
 |---|---|
@@ -157,7 +276,7 @@ The first encoder restore needs internet access and disk space. After restoratio
 
 <a name="documentation"></a>
 
-## 📚 Documentation
+## 📚 التوثيق | Documentation
 
 | Start here | Details |
 |---|---|
