@@ -1,0 +1,62 @@
+name: Public data guard
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-public-data:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify excluded data remains absent
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          import subprocess
+          from pathlib import Path
+
+          paths = subprocess.check_output(["git", "ls-files", "-z"]).decode().split("\0")
+          paths = [path for path in paths if path]
+          forbidden = [
+              path for path in paths
+              if path.startswith("data/")
+              or path.startswith("frontend/public/demo/img/")
+              or path.lower().endswith((".sqlite", ".sqlite3", ".parquet", ".xlsx"))
+          ]
+          if forbidden:
+              raise SystemExit("Tracked dataset files are not allowed: " + ", ".join(forbidden))
+
+          root = Path("frontend/public/demo")
+          for name in ("listings", "recommendations"):
+              file = root / (name + ".json")
+              payload = json.loads(file.read_text(encoding="utf-8"))
+              if payload.get("items"):
+                  raise SystemExit(f"Public demo records are not allowed: {file}")
+
+          market = json.loads((root / "market.json").read_text(encoding="utf-8"))
+          if market.get("count") != 0 or any(market.get(k) for k in ("by_make", "by_model", "by_city")):
+              raise SystemExit("Market statistics must not contain third-party records")
+
+          meta = json.loads((root / "meta.json").read_text(encoding="utf-8"))
+          if meta.get("listings_count") != 0 or meta.get("images_count") != 0:
+              raise SystemExit("Public dataset counts must remain zero")
+
+          required = [
+              "README.md",
+              "docs/assets/home-screen.jpg",
+              "docs/assets/listings-screen.jpg",
+              "docs/assets/market-screen.jpg",
+              "docs/assets/readme-hero.png.png",
+              "frontend/public/ui/saer-logo.png",
+          ]
+          for path in required:
+              if not Path(path).is_file():
+                  raise SystemExit("Required design asset missing: " + path)
+          print("Public data and design asset checks passed.")
+          PY
