@@ -22,8 +22,8 @@ def original_snapshot_check():
     for source, filename in SOURCES.items():
         cache = cache_rows(source)
         for row in read_csv(RAW / source / filename):
-            saved = cache.get(row["syarah_id"], {})
-            if str(saved.get("post_id")) != row["syarah_id"] or saved.get("id_match") is False:
+            saved = cache.get(row["external_listing_id"], {})
+            if str(saved.get("post_id")) != row["external_listing_id"] or saved.get("id_match") is False:
                 excluded_identity.append(uid(source, row["id_listing"]))
                 continue
             for field, key in [("sar_price", "post_price"), ("km_mileage", "post_mileage")]:
@@ -41,14 +41,14 @@ def source_value(row, field, evidence):
     path = ROOT / evidence["path"]
     if path.suffix == ".json":
         page = load_json(path)
-        if str(page["syarah_id"]) != row["syarah_id"] or not page["page_identity_verified"]:
+        if str(page["external_listing_id"]) != row["external_listing_id"] or not page["page_identity_verified"]:
             raise ValueError("مرجع صفحة لا يخص الإعلان")
         values = page["fields"]
     elif path.suffix == ".csv":
         values = read_csv(path)[int(row["raw_row_number"]) - 2]
     elif path.suffix == ".jsonl":
         matches = [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
-        matches = [item for item in matches if str(item.get("post_id")) == row["syarah_id"] and item.get("id_match") is not False]
+        matches = [item for item in matches if str(item.get("post_id")) == row["external_listing_id"] and item.get("id_match") is not False]
         if len(matches) != 1:
             raise ValueError("مرجع كاش غير محسوم الهوية")
         cached = matches[0]
@@ -137,7 +137,7 @@ def final_findings(rows, quarantine, quality, review, output):
     source_counts = Counter(row["source_dataset"] for row in rows)
     new_count = sum(row["condition"] == "new" for row in rows)
     origins = Counter("مسترجع" if json.loads(row["field_provenance"])["sar_price"]["path"].startswith("data/recovery/") else "أصلي" for row in rows if row["condition"] == "new")
-    kg_quarantine = sum(row["source_dataset"] == "CarInsight_KG" for row in quarantine)
+    kg_quarantine = sum(row["source_dataset"] == "external_group_c" for row in quarantine)
     known = review["optional_coverage"]
     verdicts = {
         1: ("استكمل المتاح ووثق التعذر", f"اللون والهيكل والتاريخ متوفرة الآن لـ{known['color']['after_known']} إعلانًا؛ المتعذر {known['color']['after_missing']}. لكل قيمة دليل مطابق، ولا تعويض تخميني."),

@@ -11,7 +11,7 @@ import sys
 from day20_common import ROOT, AUDIT, PROCESSED, SOURCES, read_csv, save_json, load_json, now, sha256, number
 
 REPORT = AUDIT / "external_analysis_review.json"
-STABLE_LISTING_FIELDS = ["listing_uid", "source_dataset", "source_listing_id", "syarah_id", "make", "model", "model_std", "year", "trim", "condition", "sar_price", "km_mileage", "city", "transmission", "type_fuel", "color", "body_type", "listing_date", "url_source", "date_collection", "n_images", "group_id", "split", "usable_price"]
+STABLE_LISTING_FIELDS = ["listing_uid", "source_dataset", "source_listing_id", "external_listing_id", "make", "model", "model_std", "year", "trim", "condition", "sar_price", "km_mileage", "city", "transmission", "type_fuel", "color", "body_type", "listing_date", "url_source", "date_collection", "n_images", "group_id", "split", "usable_price"]
 STABLE_IMAGE_FIELDS = ["image_uid", "listing_uid", "relative_path", "sha256", "width", "height", "label_make", "label_model", "label_color", "label_body_type", "is_exterior", "group_id", "split"]
 
 
@@ -92,10 +92,10 @@ def check_price(row):
     identities = [str(details["id"]), str(g4["post_id"]), str(analytics["id"])]
     cash = number(g4["post_price"])
     vat = number((data.get("price", {}).get("vat_price") or {}).get("text"))
-    okay = all(value == row["syarah_id"] for value in identities) and cash == float(row["sar_price"])
+    okay = all(value == row["external_listing_id"] for value in identities) and cash == float(row["sar_price"])
     okay &= vat is None or abs(vat - cash) <= 1
     okay &= hashlib.sha256(body).hexdigest() == parsed["html_sha256"]
-    return {"listing_uid": row["listing_uid"], "syarah_id": row["syarah_id"], "sar_price": cash,
+    return {"listing_uid": row["listing_uid"], "external_listing_id": row["external_listing_id"], "sar_price": cash,
             "html_path": parsed["html_path"], "three_ids_match": len(set(identities)) == 1,
             "vat_price": vat, "passed": okay}
 
@@ -115,7 +115,7 @@ def review():
     flags = Counter(code for r in listings for code in r["data_quality_flags"].split(";") if code)
     quality = load_json(PROCESSED / "quality_report.json")
     quarantine = read_csv(PROCESSED / "quarantine_listings.csv")
-    kg = [{"listing_uid": r["listing_uid"], "reasons": r["quarantine_reasons"]} for r in quarantine if r["source_dataset"] == "CarInsight_KG"]
+    kg = [{"listing_uid": r["listing_uid"], "reasons": r["quarantine_reasons"]} for r in quarantine if r["source_dataset"] == "external_group_c"]
     if len(kg) != 20 or not all(r["reasons"] for r in kg): raise ValueError("استبعادات KG غير موثقة")
     source_splits = {}
     for source in SOURCES:

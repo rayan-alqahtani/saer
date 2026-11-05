@@ -31,7 +31,7 @@ def persist(record):
 
 def confirmed_page(job, path):
     parsed = load_json(ROOT / path)
-    if not parsed or str(parsed.get("syarah_id")) != job["syarah_id"] or not parsed.get("page_identity_verified"):
+    if not parsed or str(parsed.get("external_listing_id")) != job["external_listing_id"] or not parsed.get("page_identity_verified"):
         return False
     return (ROOT / parsed["html_path"]).is_file()
 
@@ -50,7 +50,7 @@ def run(limit, budget_mb):
         existing = prior.get(key)
         if existing and (existing["status"] != "ok" or confirmed_page(job, existing["parsed_path"])):
             continue
-        record = {"listing_uid": key, "syarah_id": job["syarah_id"], "reasons": job["reasons"], "checked_at": now()}
+        record = {"listing_uid": key, "external_listing_id": job["external_listing_id"], "reasons": job["reasons"], "checked_at": now()}
         sample = pilot.get(key, {})
         saved = original.get(key, {})
         if sample.get("status") == "ok" and confirmed_page(job, sample["parsed_path"]):
@@ -76,13 +76,13 @@ def run(limit, budget_mb):
                     prior[key] = record
                     break
             else:
-                html_path = RECOVERY / "enrichment/pages" / job["source_dataset"] / (job["syarah_id"] + ".html.gz")
+                html_path = RECOVERY / "enrichment/pages" / job["source_dataset"] / (job["external_listing_id"] + ".html.gz")
                 save_bytes(html_path, gzip.compress(body, mtime=0))
                 record["html_path"] = relative(html_path)
                 try:
-                    parsed = public_page_data(body.decode("utf-8", "replace"), job["syarah_id"])
+                    parsed = public_page_data(body.decode("utf-8", "replace"), job["external_listing_id"])
                     parsed.update(source_dataset=job["source_dataset"], id_listing=job["source_listing_id"],
-                                  syarah_id=job["syarah_id"], fetched_at=now(), html_path=relative(html_path),
+                                  external_listing_id=job["external_listing_id"], fetched_at=now(), html_path=relative(html_path),
                                   source_url=job["url_source"], html_sha256=hashlib.sha256(body).hexdigest())
                     parsed_path = html_path.with_suffix("").with_suffix(".json")
                     save_json(parsed_path, parsed)

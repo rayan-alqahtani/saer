@@ -11,10 +11,10 @@ from day20_enrichment_policy import read_html
 
 def gallery_identity(photo, parent, parsed):
     url = urlsplit(photo["source_url"])
-    if url.scheme != "https" or url.hostname != "cdn.syarah.com" or "/posts/" + parent["syarah_id"] + "/" not in url.path:
+    if url.scheme != "https" or url.hostname != "cdn.example.invalid" or "/posts/" + parent["external_listing_id"] + "/" not in url.path:
         return False
-    if str(parsed["syarah_id"]) != parent["syarah_id"] or not parsed.get("page_identity_verified"): return False
-    actual = public_page_data(read_html(ROOT / parsed["html_path"]).decode("utf-8", "replace"), parent["syarah_id"])
+    if str(parsed["external_listing_id"]) != parent["external_listing_id"] or not parsed.get("page_identity_verified"): return False
+    actual = public_page_data(read_html(ROOT / parsed["html_path"]).decode("utf-8", "replace"), parent["external_listing_id"])
     return any(photo["source_url"] in {p["url"], p.get("gallery_url", p["url"])} and p["image_kind"] == photo["image_kind"] for p in actual["photos"])
 
 

@@ -27,7 +27,7 @@ def inspect_saved_page(relative_path):
     parsed = load_json(ROOT / relative_path)
     if not verified_evidence(parsed):
         raise ValueError("دليل المصدر أو بصمته غير مطابق: " + relative_path)
-    actual = public_page_data(read_html(ROOT / parsed["html_path"]).decode("utf-8", "replace"), parsed["syarah_id"])
+    actual = public_page_data(read_html(ROOT / parsed["html_path"]).decode("utf-8", "replace"), parsed["external_listing_id"])
     if actual["fields"] != parsed["fields"]:
         raise ValueError("الحقول المستخرجة تختلف عن HTML: " + relative_path)
     expected_photos = [(p["url"], p["image_kind"]) for p in actual["photos"]]
@@ -51,7 +51,7 @@ def overlay_completed(recovery):
     for key, record in events.items():
         if record["status"] == "ok":
             parsed = load_json(ROOT / record["parsed_path"])
-            if str(parsed.get("syarah_id")) != record["syarah_id"] or not verified_evidence(parsed):
+            if str(parsed.get("external_listing_id")) != record["external_listing_id"] or not verified_evidence(parsed):
                 raise ValueError("دليل استكمال غير مطابق: " + key)
             merged["pages"][key] = {"status": "ok", "parsed_path": record["parsed_path"],
                                      "at": parsed["fetched_at"], "reasons": record["reasons"], "enrichment": True}

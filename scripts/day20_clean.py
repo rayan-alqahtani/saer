@@ -120,8 +120,8 @@ def clean(preview=False):
         cached = cache_rows(source)
         for ordinal, raw in enumerate(read_csv(raw_path), 2):
             key = uid(source, raw["id_listing"])
-            original_cache = cached.get(raw["syarah_id"], {})
-            historical_identity_bad = str(original_cache.get("post_id")) != raw["syarah_id"] or original_cache.get("id_match") is False
+            original_cache = cached.get(raw["external_listing_id"], {})
+            historical_identity_bad = str(original_cache.get("post_id")) != raw["external_listing_id"] or original_cache.get("id_match") is False
             initial = effective_initial(raw, original_cache)
             model, model_origin = inferred_model(initial)
             values = {k: text(v) for k, v in initial.items()}
@@ -131,7 +131,7 @@ def clean(preview=False):
             provenance = {k: {"kind": "raw_csv", "path": relative(raw_path), "row": ordinal} for k in [*CORE_FIELDS, "trim", "km_mileage"]}
             for field in ["sar_price", "km_mileage", "trim", "city", "transmission", "type_fuel"]:
                 if not text(raw.get(field)) and text(initial.get(field)):
-                    provenance[field] = {"kind": "identity_verified_raw_cache", "path": relative(RAW / source / "raw_cache/pages.jsonl"), "syarah_id": raw["syarah_id"]}
+                    provenance[field] = {"kind": "identity_verified_raw_cache", "path": relative(RAW / source / "raw_cache/pages.jsonl"), "external_listing_id": raw["external_listing_id"]}
             provenance["model"]["kind"] = model_origin
             provenance["model"]["source_fields"] = ["model", "model_raw", "trim"] if model_origin == "source_model_and_trim" else ["model", "model_raw"]
             provenance["model"]["normalization_rules"] = "scripts/day20_common.py:normalize_model"
@@ -151,7 +151,7 @@ def clean(preview=False):
                     model = normalize_model(values["make"], values["model"], values.get("trim"))
                     values["model"] = model
                     model_origin = "public_page_recovery"
-                    issue(source, "listing", key, "syarah_id", "historical_identity_mismatch", original_cache.get("post_id"), raw["syarah_id"], "fixed", manifest_entry["parsed_path"])
+                    issue(source, "listing", key, "external_listing_id", "historical_identity_mismatch", original_cache.get("post_id"), raw["external_listing_id"], "fixed", manifest_entry["parsed_path"])
                 for field in ["make", "year", "condition"]:
                     old = canonical_make(values.get(field)) if field == "make" else number(values.get(field)) if field == "year" else text(values.get(field)).lower()
                     new = canonical_make(fresh.get(field)) if field == "make" else number(fresh.get(field)) if field == "year" else text(fresh.get(field)).lower()
@@ -180,7 +180,7 @@ def clean(preview=False):
                 issue(source, "listing", key, "source_page", "recovery_unavailable", "", status, "documented", manifest_entry.get("html_path", "data/recovery/network.jsonl"))
             if historical_identity_bad and not recovered:
                 problems.append("historical_identity_mismatch")
-                issue(source, "listing", key, "syarah_id", "historical_identity_mismatch", original_cache.get("post_id"), raw["syarah_id"], "quarantined", relative(RAW / source / "raw_cache/pages.jsonl"))
+                issue(source, "listing", key, "external_listing_id", "historical_identity_mismatch", original_cache.get("post_id"), raw["external_listing_id"], "quarantined", relative(RAW / source / "raw_cache/pages.jsonl"))
             for field in ["year", "sar_price", "km_mileage"]:
                 values[field] = number(values.get(field))
             if values["year"] is not None and values["year"].is_integer():
@@ -202,7 +202,7 @@ def clean(preview=False):
             for field in ["make", "city", "transmission", "type_fuel"]:
                 if not text(values.get(field)):
                     problems.append("missing_" + field)
-            if not raw["syarah_id"].isdigit() or not re.search(r"-" + re.escape(raw["syarah_id"]) + r"/?$", raw["url_source"]):
+            if not raw["external_listing_id"].isdigit() or not re.search(r"-" + re.escape(raw["external_listing_id"]) + r"/?$", raw["url_source"]):
                 problems.append("invalid_source_identity")
             values["color"] = text(recovered["fields"].get("color")).lower().replace("grey", "gray") if recovered else ""
             values["body_type"] = text(recovered["fields"].get("body_type")).lower() if recovered else ""
@@ -224,7 +224,7 @@ def clean(preview=False):
                     core = field in CORE_FIELDS or field == "km_mileage" and values["condition"] == "used"
                     issue(source, "listing", key, field, "missing_required_value" if core else "missing_optional_value", old, "", "quarantined" if core else "documented", manifest_entry.get("parsed_path", relative(raw_path)))
             row = {
-                "listing_uid": key, "id_listing": key, "source_dataset": source, "source_listing_id": raw["id_listing"], "syarah_id": raw["syarah_id"],
+                "listing_uid": key, "id_listing": key, "source_dataset": source, "source_listing_id": raw["id_listing"], "external_listing_id": raw["external_listing_id"],
                 **{k: values.get(k, "") for k in [*CORE_FIELDS, "trim", "km_mileage", "color", "body_type", "listing_date"]},
                 "model_std": values["model"], "url_source": raw["url_source"], "date_collection": raw["date_collection"],
                 "raw_metadata_path": relative(raw_path), "raw_row_number": ordinal,
@@ -450,7 +450,7 @@ def clean(preview=False):
         save_csv(PROCESSED / "splits" / (split + ".csv"), [{k: r[k] for k in ["listing_uid", "group_id", "source_dataset", "make", "model"]} for r in clean_listings if r["split"] == split])
     split_metadata = {"seed": 42, "method": "deterministic_greedy_stratified_listing_duplicate_groups", "target_fractions": {"train": .7, "val": .15, "test": .15}, "actual_listings": dict(Counter(r["split"] for r in clean_listings)), "actual_groups": dict(Counter(split_map.values())), "duplicate_checks": {"exact_sha256": True, "perceptual_candidates": "phash<=3,dhash<=4,pixel_MAE<=6; conservatively grouped", "structured_duplicates": True}, "test_usage": "لم تستخدم بيانات الاختبار لتدريب أو ضبط نموذج؛ الفهارس فقط أعدت اليوم."}
     save_json(PROCESSED / "splits/metadata.json", split_metadata)
-    schema = {"version": "day20-1", "created_at": now(), "language": "ar", "price_target": "سعر الإعلان بالريال السعودي، وليس سعر البيع النهائي", "price_scope": "used_only_until_new_model_evaluated", "price_features_allowlist": ["make", "model_std", "year", "km_mileage", "trim", "city", "transmission", "type_fuel"], "forbidden_model_features": ["listing_uid", "id_listing", "source_listing_id", "syarah_id", "relative_path", "path_image", "url_source", "group_id", "split", "raw_metadata_path", "field_provenance"], "missing_values": {"missing": "لم يتوفر في المصدر", "unknown": "ذكر المصدر أنه غير معروف", "invalid": "قيمة غير صالحة", "not_required_for_new": "الممشى ليس شرطًا للجديد ولم يفترض صفرًا"}, "image_labels": "وسوم اللون والهيكل مخصبة فقط من الصفحة المطابقة، ووسم الخارج/الداخل من معرض المصدر؛ الصور غير الموسومة تنتظر فلترة يوم 21.", "raw_policy": "الأصول والنسخة الخام لا تعدل؛ الاسترجاع مستقل وله تاريخ ودليل.", "all_listing_columns": list(clean_listings[0]), "all_image_columns": list(final_images[0])}
+    schema = {"version": "day20-1", "created_at": now(), "language": "ar", "price_target": "سعر الإعلان بالريال السعودي، وليس سعر البيع النهائي", "price_scope": "used_only_until_new_model_evaluated", "price_features_allowlist": ["make", "model_std", "year", "km_mileage", "trim", "city", "transmission", "type_fuel"], "forbidden_model_features": ["listing_uid", "id_listing", "source_listing_id", "external_listing_id", "relative_path", "path_image", "url_source", "group_id", "split", "raw_metadata_path", "field_provenance"], "missing_values": {"missing": "لم يتوفر في المصدر", "unknown": "ذكر المصدر أنه غير معروف", "invalid": "قيمة غير صالحة", "not_required_for_new": "الممشى ليس شرطًا للجديد ولم يفترض صفرًا"}, "image_labels": "وسوم اللون والهيكل مخصبة فقط من الصفحة المطابقة، ووسم الخارج/الداخل من معرض المصدر؛ الصور غير الموسومة تنتظر فلترة يوم 21.", "raw_policy": "الأصول والنسخة الخام لا تعدل؛ الاسترجاع مستقل وله تاريخ ودليل.", "all_listing_columns": list(clean_listings[0]), "all_image_columns": list(final_images[0])}
     schema["version"] = "day20-2-reviewed"
     if enrichment_summary.get("complete"):
         schema["version"] = "day20-3-source-enriched"

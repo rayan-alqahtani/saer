@@ -86,7 +86,7 @@ def inventory():
         missing_slots = [r for r in catalog if (r["id_listing"], int(r["image_no"])) not in downloaded_keys]
         missing_ids = {r["id_listing"] for r in missing_slots}
         lid = {r["id_listing"] for r in listings}
-        xlsx = next(base.glob("CarInsight_member*.xlsx"))
+        xlsx = next(base.glob("external_member*.xlsx"))
         wb = load_workbook(xlsx, read_only=True, data_only=True)
         sheet_details = [{"name": s.title, "rows_including_header": s.max_row, "columns": s.max_column, "headers": list(next(s.iter_rows(values_only=True), []))} for s in wb]
         sheet = wb["cars_clean"]
@@ -116,10 +116,10 @@ def inventory():
             with zipfile.ZipFile(path) as archive:
                 archive_checks.append({"path": relative(path), "members": len(archive.infolist()), "crc_error": archive.testzip()})
         for row in listings:
-            initial = effective_initial(row, cached.get(row["syarah_id"], {}))
+            initial = effective_initial(row, cached.get(row["external_listing_id"], {}))
             reasons = recovery_reasons(initial, downloaded_ids, missing_ids)
             if reasons:
-                recovery_queue.append({"source_dataset": source, "id_listing": row["id_listing"], "syarah_id": row["syarah_id"], "url": row["url_source"], "reasons": reasons, "priority": 0 if "no_downloaded_image" in reasons else 1 if "missing_sar_price" in reasons else 2})
+                recovery_queue.append({"source_dataset": source, "id_listing": row["id_listing"], "external_listing_id": row["external_listing_id"], "url": row["url_source"], "reasons": reasons, "priority": 0 if "no_downloaded_image" in reasons else 1 if "missing_sar_price" in reasons else 2})
             for key, value in row.items():
                 if not text(value):
                     listing_issues.append({"source_dataset": source, "listing_uid": uid(source, row["id_listing"]), "field": key, "issue_code": "missing_value", "original_value": ""})
@@ -143,7 +143,7 @@ def inventory():
         all_images.extend(stats)
         summary = {
             "listings": len(listings), "columns": list(listings[0]), "missing": {k: sum(not text(r.get(k)) for r in listings) for k in listings[0]},
-            "unique_listing_ids": len(lid), "unique_source_ids": len({r["syarah_id"] for r in listings}),
+            "unique_listing_ids": len(lid), "unique_source_ids": len({r["external_listing_id"] for r in listings}),
             "makes": dict(Counter(r["make"] for r in listings)), "conditions": dict(Counter(r["condition"] for r in listings)),
             "images_on_disk": len(stats), "invalid_images": sum(str(r["is_valid"]).lower() != "true" for r in stats),
             "catalog_images": len(catalog), "missing_image_slots": len(missing_slots), "listings_without_images": len(lid - downloaded_ids),

@@ -43,7 +43,7 @@ class PublicClient:
     def get(self, url, robots=False):
         parsed = urllib.parse.urlsplit(url)
         host = parsed.hostname
-        if parsed.scheme != "https" or host not in {"syarah.com", "cdn.syarah.com"}:
+        if parsed.scheme != "https" or host not in {"example.invalid", "cdn.example.invalid"}:
             return None, {"status": "rejected_host", "url": url}
         if host in self.stopped:
             return None, {"status": "host_stopped", "reason": self.stopped[host], "url": url}
@@ -83,7 +83,7 @@ class PublicClient:
                         except (OSError, EOFError):
                             pass  # يبقى رفض المضيف نافذًا إن تعذر فك رسالة الخطأ.
                     # هذا رد S3 لملف robots غير الموجود، كما في السكربت الأصلي.
-                    no_robot_file = robots and host == "cdn.syarah.com" and error.code == 403 and b"<Code>AccessDenied</Code>" in body
+                    no_robot_file = robots and host == "cdn.example.invalid" and error.code == 403 and b"<Code>AccessDenied</Code>" in body
                     result = {"status": error.code, "url": url, "missing_cdn_robots": no_robot_file}
                     self.log(result)
                     if error.code in (403, 429) and not no_robot_file:
@@ -117,7 +117,7 @@ class PublicClient:
         return max(matches, default=(0, True))[1]
 
     def init_robots(self):
-        for host in ["syarah.com", "cdn.syarah.com"]:
+        for host in ["example.invalid", "cdn.example.invalid"]:
             body, status = self.get(f"https://{host}/robots.txt", robots=True)
             if body is None:
                 self.rules[host] = None
@@ -153,9 +153,9 @@ def prepare_queue():
         missing_ids = {r["id_listing"] for r in catalog if (r["id_listing"], int(r["image_no"])) not in keys}
         cached = cache_rows(source)
         for row in rows:
-            reasons = recovery_reasons(effective_initial(row, cached.get(row["syarah_id"], {})), downloaded_ids, missing_ids)
+            reasons = recovery_reasons(effective_initial(row, cached.get(row["external_listing_id"], {})), downloaded_ids, missing_ids)
             if reasons:
-                jobs.append({"source_dataset": source, "id_listing": row["id_listing"], "syarah_id": row["syarah_id"], "url": row["url_source"], "reasons": reasons, "priority": 0 if "no_downloaded_image" in reasons else 1 if "missing_sar_price" in reasons else 2})
+                jobs.append({"source_dataset": source, "id_listing": row["id_listing"], "external_listing_id": row["external_listing_id"], "url": row["url_source"], "reasons": reasons, "priority": 0 if "no_downloaded_image" in reasons else 1 if "missing_sar_price" in reasons else 2})
     jobs.sort(key=lambda r: (r["priority"], r["source_dataset"], r["id_listing"]))
     save_json(AUDIT / "recovery_queue.json", jobs)
     print(json.dumps({"recovery_pages": len(jobs)}, ensure_ascii=False), flush=True)
@@ -224,7 +224,7 @@ def run():
     worker = threading.Thread(target=image_worker, daemon=True)
     worker.start()
     for index, job in enumerate(jobs, 1):
-        source, listing_id, sid = job["source_dataset"], job["id_listing"], job["syarah_id"]
+        source, listing_id, sid = job["source_dataset"], job["id_listing"], job["external_listing_id"]
         key = uid(source, listing_id)
         parsed_path = RECOVERY / "pages" / source / (sid + ".json")
         html_path = parsed_path.with_suffix(".html")
@@ -248,7 +248,7 @@ def run():
             save_bytes(html_path, body)
             try:
                 parsed = public_page_data(body.decode("utf-8", "replace"), sid)
-                parsed.update(source_dataset=source, id_listing=listing_id, syarah_id=sid, fetched_at=now(), html_path=relative(html_path), source_url=job["url"], html_sha256=hashlib.sha256(body).hexdigest())
+                parsed.update(source_dataset=source, id_listing=listing_id, external_listing_id=sid, fetched_at=now(), html_path=relative(html_path), source_url=job["url"], html_sha256=hashlib.sha256(body).hexdigest())
                 save_json(parsed_path, parsed)
                 with state_lock:
                     state["pages"][key] = {"status": "ok", "parsed_path": relative(parsed_path), "at": now(), "reasons": job["reasons"]}
@@ -270,7 +270,7 @@ def run():
             for photo in candidates[:needed]:
                 if photo["url"] not in queued_urls:
                     queued_urls.add(photo["url"])
-                    image_jobs.put({**photo, "source_dataset": source, "id_listing": listing_id, "listing_uid": key, "syarah_id": sid, "page_evidence": relative(parsed_path), "original_slot_no": missing_names.get(basename(photo["url"]), "")})
+                    image_jobs.put({**photo, "source_dataset": source, "id_listing": listing_id, "listing_uid": key, "external_listing_id": sid, "page_evidence": relative(parsed_path), "original_slot_no": missing_names.get(basename(photo["url"]), "")})
         if index % 20 == 0:
             print(json.dumps({"pages_processed": index, "pages_total": len(jobs), "pages_saved": sum(v["status"] == "ok" for v in state["pages"].values()), "images_saved": len(state["images"]), "image_queue": image_jobs.qsize(), "host_stops": client.stopped}, ensure_ascii=False), flush=True)
     image_jobs.put(None)
