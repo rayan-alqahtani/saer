@@ -1,15 +1,12 @@
 from __future__ import annotations
 
-import csv
-import hashlib
 import time
-from pathlib import Path
 from typing import Generator
 
 from sqlalchemy import Boolean, Float, ForeignKey, Integer, String, create_engine, delete, select
 from sqlalchemy.orm import DeclarativeBase, Mapped, Session, mapped_column, sessionmaker
 
-from backend.app.config import DB_DIR, DB_PATH, IMAGES_CSV, LISTINGS_CSV, ROOT
+from backend.app.config import DB_DIR, DB_PATH
 
 
 class Base(DeclarativeBase):
@@ -83,104 +80,15 @@ engine = create_engine(f"sqlite:///{DB_PATH.as_posix()}", connect_args={"check_s
 SessionLocal = sessionmaker(bind=engine, autoflush=False, expire_on_commit=False)
 
 
-def _bool(value: str | None) -> bool:
-    return str(value or "").strip().lower() in {"true", "1", "yes"}
-
-
-def _int(value: str | None) -> int | None:
-    try:
-        return int(float(value)) if value not in (None, "") else None
-    except (TypeError, ValueError, OverflowError):
-        return None
-
-
-def _float(value: str | None) -> float | None:
-    try:
-        return float(value) if value not in (None, "") else None
-    except (TypeError, ValueError, OverflowError):
-        return None
-
-
-def _fingerprint() -> str:
-    digest = hashlib.sha256()
-    for path in (LISTINGS_CSV, IMAGES_CSV):
-        if not path.is_file():
-            raise FileNotFoundError(f"ملف بيانات المشروع غير موجود: {path}")
-        with path.open("rb") as file:
-            for block in iter(lambda: file.read(1024 * 1024), b""):
-                digest.update(block)
-    return digest.hexdigest()
-
-
 def ensure_database() -> dict[str, int | bool]:
-    """يبني نسخة SQLite محلية من ملفات processed دون تعديلها."""
+    """Prepare local tables without importing external advertisement records."""
     Base.metadata.create_all(engine)
-    source_hash = _fingerprint()
     with SessionLocal() as session:
-        prior = session.get(DatasetMeta, "source_sha256")
-        listings_count = session.scalar(select(Listing.uid).limit(1))
-        if prior and prior.value == source_hash and listings_count:
-            return {
-                "rebuilt": False,
-                "listings": session.query(Listing).count(),
-                "images": session.query(ImageAsset).count(),
-            }
-
         session.execute(delete(ImageAsset))
         session.execute(delete(Listing))
-        listing_rows: list[Listing] = []
-        with LISTINGS_CSV.open("r", encoding="utf-8-sig", newline="") as file:
-            for row in csv.DictReader(file):
-                uid = row.get("listing_uid") or ""
-                if not uid:
-                    continue
-                listing_rows.append(Listing(
-                    uid=uid,
-                    source=row.get("source_dataset") or None,
-                    make=row.get("make") or None,
-                    model=row.get("model") or None,
-                    model_std=row.get("model_std") or None,
-                    year=_int(row.get("year")),
-                    condition=row.get("condition") or None,
-                    price=_float(row.get("sar_price")),
-                    mileage=_float(row.get("km_mileage")),
-                    city=row.get("city") or None,
-                    transmission=row.get("transmission") or None,
-                    fuel=row.get("type_fuel") or None,
-                    trim=row.get("trim") or None,
-                    trim_std=row.get("trim_std") or None,
-                    body=row.get("body_type_std") or row.get("body_type") or None,
-                    color=row.get("color_std") or row.get("color") or None,
-                    listing_date=row.get("listing_date") or None,
-                    usable_price=_bool(row.get("usable_price")),
-                    image_count=_int(row.get("n_images")) or 0,
-                ))
-        session.add_all(listing_rows)
-        session.flush()
-
-        image_rows: list[ImageAsset] = []
-        with IMAGES_CSV.open("r", encoding="utf-8-sig", newline="") as file:
-            for row in csv.DictReader(file):
-                listing_uid = row.get("listing_uid") or ""
-                path = row.get("relative_path") or ""
-                image_uid = row.get("image_uid") or path
-                if not listing_uid or not path:
-                    continue
-                # Keep the source-relative path; file serving separately checks its root.
-                image_rows.append(ImageAsset(
-                    image_uid=image_uid,
-                    listing_uid=listing_uid,
-                    relative_path=path,
-                    sha256=row.get("sha256") or None,
-                    image_kind=row.get("image_kind") or None,
-                    valid=_bool(row.get("is_valid")) and (ROOT / Path(path)).is_file(),
-                    width=_int(row.get("width")),
-                    height=_int(row.get("height")),
-                ))
-        session.add_all(image_rows)
-        session.merge(DatasetMeta(key="source_sha256", value=source_hash))
+        session.execute(delete(DatasetMeta))
         session.commit()
-        return {"rebuilt": True, "listings": len(listing_rows), "images": len(image_rows)}
+    return {"rebuilt": False, "listings": 0, "images": 0}
 
 
 def get_session() -> Generator[Session, None, None]:

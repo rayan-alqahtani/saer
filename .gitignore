@@ -52,7 +52,7 @@ credentials.json
 credentials-*.json
 service-account*.json
 
-# حماية الإضافات الجديدة؛ الملفات المتتبعة الحالية تبقى محفوظة دون حذف.
+# بيانات الطرف الثالث خارج المستودع العام، حتى لو استُخدمت محليًا.
 /data/raw/
 /data/recovery/
 /data/processed/*.csv
@@ -74,3 +74,9 @@ service-account*.json
 .runtime-cache/
 
 hf_backend/outputs/clip_identity_20261027_v1/checkpoint_compatibility.json
+
+# منع إعادة نشر بيانات الإعلانات والصور التي لا نملك حقوقها
+/data/
+/frontend/public/demo/img/
+*.parquet
+*.csv
