@@ -115,7 +115,7 @@ def prepare():
         if sha256(path) != r['sha256']: raise ValueError('تغيرت صورة: ' + r['image_uid'])
     pairs, excluded = audit_near(rows)
     # عزل المجموعات المعروفة من المراجعة السابقة، لا تعديل split/group_id الأصليين.
-    known_ids = {'CarInsight_USA:0035US', 'CarInsight_USA:0036US'}
+    known_ids = {'external_group_b:0035US', 'external_group_b:0036US'}
     known_groups = {r['group_id'] for r in listings if r['listing_uid'] in known_ids}
     excluded |= known_groups
     rejected = [{'listing_uid':r['listing_uid'], 'group_id':r['group_id'], 'reason':'known_or_strict_near_duplicate_cross_split'} for r in rows if r['group_id'] in excluded]

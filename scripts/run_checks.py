@@ -17,8 +17,8 @@ def check_gitignore():
     repo.mkdir(parents=True, exist_ok=False)
     subprocess.run([git, "init", "--quiet", str(repo)], check=True, capture_output=True)
     shutil.copy2(ROOT / ".gitignore", repo / ".gitignore")
-    blocked = ["CarInsight_Japan/member1_japanese.csv", "CarInsight_USA/images/a.webp", "CarInsight_KG/prepared/listings.csv", "CarInsight_AI_Docs.zip", "data/raw/x.csv", "data/processed/listings.csv", "data/recovery/images/a.webp", "models/price.joblib", ".env", ".env.local", "credentials.json", "photo.webp", "book.xlsx", "model.npz", "frontend/node_modules/pkg/index.js"]
-    allowed = ["README.md", "AGENTS.md", "scripts/day20_common.py", "tests/test_day20_quality.py", "requirements-data.txt", ".env.example"]
+    blocked = ["external_group_a/member1_japanese.csv", "external_group_b/images/a.webp", "external_group_c/prepared/listings.csv", "external_data_bundle.zip", "data/raw/x.csv", "data/processed/listings.csv", "data/recovery/images/a.webp", "models/price.joblib", ".env", ".env.local", "credentials.json", "photo.webp", "book.xlsx", "model.npz", "frontend/node_modules/pkg/index.js"]
+    allowed = ["README.md", "docs/DATA_POLICY.md", "scripts/day20_common.py", "tests/test_day20_quality.py", "requirements-data.txt", ".env.example"]
     # LF بايتات صريحة: تحويل stdin إلى CRLF على Windows يجعل Git يرى CR جزءًا من المسار.
     result = subprocess.run([git, "-C", str(repo), "check-ignore", "--no-index", "--stdin"], input=("\n".join(blocked + allowed) + "\n").encode("utf-8"), capture_output=True, check=False)
     ignored = set(result.stdout.decode("utf-8").splitlines())

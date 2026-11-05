@@ -254,7 +254,7 @@ def main():
     oldmap = {r['image_uid']:r['predicted'] for r in read_csv(session()/'make/val_predictions.csv')}
     oldpred = np.asarray([oldmap[r['image_uid']] for r in va])
     # عزل إعلان الصورة المعاد تحريرها بين val/test عن المقارنة الأساسية فقط؛ الجدول الأصلي ثابت.
-    clean = np.asarray([r['listing_uid'] != 'CarInsight_USA:0035US' for r in va])
+    clean = np.asarray([r['listing_uid'] != 'external_group_b:0035US' for r in va])
     result = {'full_val':score(labels,probs,classes),'test_evaluated':False,'selection':chosen}
     for name,mask in [('all_val',np.ones(len(va),dtype=bool)),('audited_val',clean)]:
         rows = [r for r,k in zip(va,mask) if k]

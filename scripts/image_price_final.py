@@ -24,7 +24,7 @@ ROOT = next((p for p in [Path(__file__).resolve().parent, *Path(__file__).resolv
              if (p/'data/processed/training_manifest.json').exists()), Path.cwd())
 DATA = ROOT / 'models/claude_image_price_tuning_20261022/train_val'
 OLD = ROOT / 'models/image_price_20261022T114653955552'
-SOURCE = ROOT / 'tmp/independent_review_20261023/gemini/carinsight_v2_20261022'
+SOURCE = ROOT / 'tmp/independent_review_20261023/gemini/experiment_v2_20261022'
 POINTER = ROOT / 'models/image_price_final_work.json'
 SEED = 20261023
 torch.set_num_threads(4)

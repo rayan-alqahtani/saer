@@ -18,9 +18,9 @@ RECOVERY = ROOT / "data/recovery"
 STAGING = ROOT / "data/staging/day20"
 PROCESSED = ROOT / "data/processed"
 SOURCES = {
-    "CarInsight_Japan": "member1_japanese.csv",
-    "CarInsight_USA": "member2_american.csv",
-    "CarInsight_KG": "member3_korean_german.csv",
+    "external_group_a": "member1_japanese.csv",
+    "external_group_b": "member2_american.csv",
+    "external_group_c": "member3_korean_german.csv",
 }
 AR_DIGITS = str.maketrans("٠١٢٣٤٥٦٧٨٩۰۱۲۳۴۵۶۷۸۹", "01234567890123456789")
 
@@ -106,7 +106,7 @@ def cache_rows(source):
     for line in path.read_text(encoding="utf-8-sig").splitlines():
         if line.strip():
             row = json.loads(line)
-            result[str(row.get("syarah_id"))] = row
+            result[str(row.get("external_listing_id"))] = row
     return result
 
 def model_key(value):
@@ -163,7 +163,7 @@ def inferred_model(row):
 def effective_initial(row, cache):
     out = dict(row)
     # لا نستورد من سجل مخبأ لإعلان آخر.
-    if str(cache.get("post_id")) == str(row.get("syarah_id")) and cache.get("id_match") is not False:
+    if str(cache.get("post_id")) == str(row.get("external_listing_id")) and cache.get("id_match") is not False:
         mapping = {"sar_price": "post_price", "km_mileage": "post_mileage", "trim": "post_ext", "city": "post_city", "transmission": "post_transmission", "type_fuel": "post_fuel", "model_raw": "post_model"}
         for field, key in mapping.items():
             if not text(out.get(field)) and text(cache.get(key)):

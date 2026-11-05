@@ -41,8 +41,8 @@ def new_run(task):
                 'platform': platform.platform(), 'device': 'cpu', 'versions': env,
                 'training_status': 'started', 'external_evaluation': 'لم يختبر بعد',
                 'source_review': {str(p.relative_to(ROOT)): sha256(p) for p in [
-                    ROOT/'CarInsight_KG/02_price_model.py', ROOT/'CarInsight_KG/03_train_recognizer.py',
-                    ROOT/'CarInsight_KG/04_visual_search.py']}}
+                    ROOT/'external_group_c/02_price_model.py', ROOT/'external_group_c/03_train_recognizer.py',
+                    ROOT/'external_group_c/04_visual_search.py']}}
     save_json(folder / 'metadata.json', metadata)
     gate_path = ROOT / 'data/audit/day20/data_completion_gate.json'
     gate = load_json(gate_path)

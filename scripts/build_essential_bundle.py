@@ -13,7 +13,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 LISTING_FILE = "الداتا_المحدثة.csv"
 IMAGE_FILE = "ربط_الصور.csv"
-LISTING_COLUMNS = ["listing_uid", "source_dataset", "source_listing_id", "syarah_id", "make", "model", "model_std", "year", "trim", "condition", "sar_price", "km_mileage", "city", "transmission", "type_fuel", "color", "body_type", "listing_date", "url_source", "date_collection", "n_images", "group_id", "split", "usable_price", "usable_recognition", "rec_label"]
+LISTING_COLUMNS = ["listing_uid", "source_dataset", "source_listing_id", "external_listing_id", "make", "model", "model_std", "year", "trim", "condition", "sar_price", "km_mileage", "city", "transmission", "type_fuel", "color", "body_type", "listing_date", "url_source", "date_collection", "n_images", "group_id", "split", "usable_price", "usable_recognition", "rec_label"]
 IMAGE_COLUMNS = ["image_uid", "listing_uid", "relative_path", "width", "height", "sha256", "label_make", "label_model", "label_color", "label_body_type", "image_kind", "is_exterior", "exterior_status", "usable_recognition", "usable_visual_search", "split", "group_id", "duplicate_group", "rec_label", "source_url"]
 LISTING_COLUMNS += ["data_quality_flags", "recognition_status"]
 LISTING_COLUMNS += ["mileage_source_status", "current_source_mileage", "source_verified_at", "trim_status"]
