@@ -71,27 +71,27 @@ class EnrichmentPolicyTests(unittest.TestCase):
         self.assertEqual(public_page_data(body, "1")["fields"]["trim"], "")
 
     def test_compressed_s3_missing_robots_is_read_before_policy_decision(self):
-        error = urllib.error.HTTPError("https://cdn.syarah.com/robots.txt", 403, "Forbidden",
+        error = urllib.error.HTTPError("https://cdn.example.invalid/robots.txt", 403, "Forbidden",
                   {"Content-Encoding": "gzip"}, io.BytesIO(gzip.compress(b"<Error><Code>AccessDenied</Code></Error>")))
         client = PublicClient(compressed=True)
         client.log = lambda value: None
         with patch("urllib.request.urlopen", side_effect=error), patch("time.sleep"):
-            body, status = client.get("https://cdn.syarah.com/robots.txt", robots=True)
+            body, status = client.get("https://cdn.example.invalid/robots.txt", robots=True)
         self.assertEqual(body, b"")
         self.assertTrue(status["missing_cdn_robots"])
-        self.assertNotIn("cdn.syarah.com", client.stopped)
+        self.assertNotIn("cdn.example.invalid", client.stopped)
 
     def test_actual_image_access_denial_still_stops_host(self):
-        url = "https://cdn.syarah.com/photos/test.webp"
+        url = "https://cdn.example.invalid/photos/test.webp"
         error = urllib.error.HTTPError(url, 403, "Forbidden", {"Content-Encoding": "gzip"},
                   io.BytesIO(gzip.compress(b"<Error><Code>AccessDenied</Code></Error>")))
         client = PublicClient(compressed=True)
         client.log = lambda value: None
-        client.rules["cdn.syarah.com"] = []
+        client.rules["cdn.example.invalid"] = []
         with patch("urllib.request.urlopen", side_effect=error), patch("time.sleep"):
             body, _ = client.get(url)
         self.assertIsNone(body)
-        self.assertEqual(client.stopped["cdn.syarah.com"], 403)
+        self.assertEqual(client.stopped["cdn.example.invalid"], 403)
 
 
 if __name__ == "__main__":

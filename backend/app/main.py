@@ -24,7 +24,7 @@ from PIL import Image, UnidentifiedImageError
 from sqlalchemy import and_, func, or_, select
 from sqlalchemy.orm import Session
 
-from backend.app.branding_compat import LEGACY_SESSION_COOKIE, SESSION_COOKIE, session_token
+from backend.app.branding_compat import SESSION_COOKIE, session_token
 from backend.app.config import APP_NAME, MAX_IMAGE_PIXELS, MAX_UPLOAD_BYTES, ROOT, UPLOAD_DIR
 from backend.app.db import AuthSession, AuthUser, ImageAsset, Listing, ensure_database, get_session
 from backend.app.schemas import AuthCredentials, ListingCompareRequest, TabularPriceRequest
@@ -226,7 +226,6 @@ def auth_logout(request: Request, response: Response, session: Session = Depends
             session.delete(saved)
             session.commit()
     response.delete_cookie(SESSION_COOKIE, path="/")
-    response.delete_cookie(LEGACY_SESSION_COOKIE, path="/")
     return {"ok": True}
 
 

@@ -10,9 +10,9 @@ from day20_finalize_data import publish
 
 class SupplementalSourceTests(unittest.TestCase):
     def fixture(self):
-        url = "https://cdn.syarah.com/photos-thumbs/online-v1/0x683/online/posts/123/original.heic?v=3"
-        return {"source_url": url, "image_kind": "exterior"}, {"syarah_id": "123"}, {
-            "syarah_id": "123", "page_identity_verified": True, "html_path": "data/recovery/test.html"}
+        url = "https://cdn.example.invalid/photos-thumbs/online-v1/0x683/online/posts/123/original.heic?v=3"
+        return {"source_url": url, "image_kind": "exterior"}, {"external_listing_id": "123"}, {
+            "external_listing_id": "123", "page_identity_verified": True, "html_path": "data/recovery/test.html"}
 
     def test_actual_gallery_size_url_is_valid_despite_filename_extension(self):
         photo, parent, parsed = self.fixture()

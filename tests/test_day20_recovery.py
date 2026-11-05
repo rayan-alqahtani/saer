@@ -17,7 +17,7 @@ def saved_page(sid, source):
 
 class RecoveryRegressionTests(unittest.TestCase):
     def test_new_listing_color_variant_does_not_hide_cash_price(self):
-        sample = saved_page("291104", "CarInsight_USA")
+        sample = saved_page("291104", "external_group_b")
         result = public_page_data(sample.read_text(encoding="utf-8"), "291104")
         self.assertEqual(result["fields"]["sar_price"], 167900)
         self.assertEqual(result["fields"]["model"], "Taurus")
@@ -25,14 +25,14 @@ class RecoveryRegressionTests(unittest.TestCase):
         self.assertIsNone(result["fields"]["km_mileage"])
 
     def test_heic_urls_are_not_silently_discarded(self):
-        sample = saved_page("317755", "CarInsight_Japan")
+        sample = saved_page("317755", "external_group_a")
         result = public_page_data(sample.read_text(encoding="utf-8"), "317755")
         self.assertTrue(result["photos"])
         self.assertTrue(any(".heic" in p["url"] for p in result["photos"]))
         self.assertTrue(all("/posts/317755/" in p["url"] for p in result["photos"]))
 
     def test_wrong_listing_is_rejected_even_with_similar_posts(self):
-        sample = saved_page("291104", "CarInsight_USA")
+        sample = saved_page("291104", "external_group_b")
         with self.assertRaisesRegex(ValueError, "identity_mismatch"):
             public_page_data(sample.read_text(encoding="utf-8"), "292274")
 
@@ -56,18 +56,18 @@ class RecoveryRegressionTests(unittest.TestCase):
         self.assertEqual(normalize_model("Mitsubishi", "New Outlander Series"), "Outlander")
 
     def test_unverified_slug_model_keeps_provenance(self):
-        model, source = inferred_model({"make": "Kia", "url_source": "https://syarah.com/cardetail/kia-sonet-used-123", "model": "", "model_raw": ""})
+        model, source = inferred_model({"make": "Kia", "url_source": "https://example.invalid/cardetail/kia-sonet-used-123", "model": "", "model_raw": ""})
         self.assertEqual(model, "Sonet")
         self.assertEqual(source, "listing_url_unverified")
 
     def test_robots_longest_rule_and_wildcards(self):
         client = PublicClient()
-        client.rules["syarah.com"] = [(False, "/api/"), (False, "/*?*"), (True, "/*?page=*"), (False, "/*user/*")]
-        self.assertTrue(client.allowed("https://syarah.com/cardetail/kia-123"))
-        self.assertFalse(client.allowed("https://syarah.com/api/private"))
-        self.assertFalse(client.allowed("https://syarah.com/cardetail/kia-123?x=1"))
-        self.assertTrue(client.allowed("https://syarah.com/autos?page=2"))
-        self.assertFalse(client.allowed("https://syarah.com/ar/user/profile"))
+        client.rules["example.invalid"] = [(False, "/api/"), (False, "/*?*"), (True, "/*?page=*"), (False, "/*user/*")]
+        self.assertTrue(client.allowed("https://example.invalid/cardetail/kia-123"))
+        self.assertFalse(client.allowed("https://example.invalid/api/private"))
+        self.assertFalse(client.allowed("https://example.invalid/cardetail/kia-123?x=1"))
+        self.assertTrue(client.allowed("https://example.invalid/autos?page=2"))
+        self.assertFalse(client.allowed("https://example.invalid/ar/user/profile"))
 
 if __name__ == "__main__":
     unittest.main()
