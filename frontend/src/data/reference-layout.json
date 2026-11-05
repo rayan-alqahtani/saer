@@ -1,0 +1,345 @@
+{
+  "home": {
+    "width": 1536,
+    "height": 1024,
+    "background": "/ui/home/background.png",
+    "parts": {
+      "heading": {
+        "x": 450,
+        "y": 150,
+        "w": 650,
+        "h": 155,
+        "src": "/ui/home/heading-saer.png"
+      },
+      "brands": {
+        "x": 580,
+        "y": 308,
+        "w": 378,
+        "h": 52,
+        "src": "/ui/home/brands.png"
+      },
+      "estimate": {
+        "x": 1018,
+        "y": 348,
+        "w": 474,
+        "h": 285,
+        "src": "/ui/home/estimate.png"
+      },
+      "sell": {
+        "x": 535,
+        "y": 348,
+        "w": 469,
+        "h": 285,
+        "src": "/ui/home/sell.png"
+      },
+      "budget": {
+        "x": 45,
+        "y": 348,
+        "w": 476,
+        "h": 285,
+        "src": "/ui/home/budget.png"
+      },
+      "compare": {
+        "x": 1018,
+        "y": 647,
+        "w": 474,
+        "h": 301,
+        "src": "/ui/home/compare.png"
+      },
+      "market": {
+        "x": 535,
+        "y": 647,
+        "w": 469,
+        "h": 301,
+        "src": "/ui/home/market.png"
+      },
+      "browse": {
+        "x": 45,
+        "y": 647,
+        "w": 476,
+        "h": 301,
+        "src": "/ui/home/browse.png"
+      }
+    }
+  },
+  "sell": {
+    "width": 1536,
+    "height": 1024,
+    "background": "/ui/sell/background.png",
+    "parts": {
+      "breadcrumb": {
+        "x": 1180,
+        "y": 145,
+        "w": 280,
+        "h": 40,
+        "src": "/ui/sell/breadcrumb.png"
+      },
+      "heading": {
+        "x": 490,
+        "y": 185,
+        "w": 550,
+        "h": 148,
+        "src": "/ui/sell/heading.png"
+      },
+      "photo": {
+        "x": 775,
+        "y": 360,
+        "w": 600,
+        "h": 496,
+        "src": "/ui/sell/photo-reference.png"
+      },
+      "manual": {
+        "x": 162,
+        "y": 360,
+        "w": 603,
+        "h": 496,
+        "src": "/ui/sell/manual-reference.png"
+      },
+      "information": {
+        "x": 362,
+        "y": 878,
+        "w": 812,
+        "h": 100,
+        "src": "/ui/sell/information.png"
+      }
+    }
+  },
+  "details": {
+    "width": 1536,
+    "height": 1024,
+    "background": "/ui/details/background.png",
+    "parts": {
+      "breadcrumb": {
+        "x": 1180,
+        "y": 145,
+        "w": 280,
+        "h": 40,
+        "src": "/ui/details/breadcrumb.png"
+      },
+      "heading": {
+        "x": 480,
+        "y": 180,
+        "w": 580,
+        "h": 143,
+        "src": "/ui/details/heading.png"
+      },
+      "form": {
+        "x": 163,
+        "y": 360,
+        "w": 633,
+        "h": 529,
+        "src": "/ui/details/form.png"
+      },
+      "identity": {
+        "x": 808,
+        "y": 360,
+        "w": 569,
+        "h": 529,
+        "src": "/ui/details/identity-reference.png"
+      },
+      "information": {
+        "x": 365,
+        "y": 902,
+        "w": 808,
+        "h": 92,
+        "src": "/ui/details/information.png"
+      }
+    }
+  },
+  "estimate": {
+    "width": 1536,
+    "height": 1024,
+    "background": "/ui/estimate/background.png",
+    "parts": {
+      "navbar": {
+        "x": 40,
+        "y": 15,
+        "w": 1456,
+        "h": 115,
+        "src": "/ui/estimate/navbar.png"
+      },
+      "breadcrumb": {
+        "x": 1134,
+        "y": 145,
+        "w": 326,
+        "h": 40,
+        "src": "/ui/estimate/breadcrumb.png"
+      },
+      "heading": {
+        "x": 420,
+        "y": 190,
+        "w": 705,
+        "h": 130,
+        "src": "/ui/estimate/heading.png"
+      },
+      "result": {
+        "x": 162,
+        "y": 347,
+        "w": 599,
+        "h": 510,
+        "src": "/ui/estimate/result.png"
+      },
+      "upload": {
+        "x": 776,
+        "y": 347,
+        "w": 602,
+        "h": 510,
+        "src": "/ui/estimate/upload.png"
+      },
+      "submit": {
+        "x": 430,
+        "y": 873,
+        "w": 676,
+        "h": 73,
+        "src": "/ui/estimate/submit.png"
+      },
+      "information": {
+        "x": 604,
+        "y": 954,
+        "w": 322,
+        "h": 43,
+        "src": "/ui/estimate/information.png"
+      }
+    }
+  },
+  "budget": {
+    "width": 1536,
+    "height": 1024,
+    "background": "/ui/budget/background.png",
+    "parts": {
+      "heading": {
+        "x": 355,
+        "y": 167,
+        "w": 832,
+        "h": 122,
+        "src": "/ui/budget/heading.png"
+      },
+      "filters": {
+        "x": 106,
+        "y": 327,
+        "w": 1326,
+        "h": 237,
+        "src": "/ui/budget/filters.png"
+      },
+      "results-heading": {
+        "x": 1016,
+        "y": 579,
+        "w": 406,
+        "h": 41,
+        "src": "/ui/budget/results-heading.png"
+      },
+      "notice": {
+        "x": 112,
+        "y": 588,
+        "w": 455,
+        "h": 30,
+        "src": "/ui/budget/notice.png"
+      },
+      "car4": {
+        "x": 93,
+        "y": 628,
+        "w": 267,
+        "h": 307,
+        "src": "/ui/budget/car4-default.png"
+      },
+      "car3": {
+        "x": 372,
+        "y": 628,
+        "w": 261,
+        "h": 307,
+        "src": "/ui/budget/car3-default.png"
+      },
+      "car2": {
+        "x": 642,
+        "y": 628,
+        "w": 254,
+        "h": 307,
+        "src": "/ui/budget/car2-default.png"
+      },
+      "car1": {
+        "x": 903,
+        "y": 628,
+        "w": 263,
+        "h": 307,
+        "src": "/ui/budget/car1-default.png"
+      },
+      "car0": {
+        "x": 1175,
+        "y": 628,
+        "w": 268,
+        "h": 307,
+        "src": "/ui/budget/car0-default.png"
+      },
+      "refresh": {
+        "x": 612,
+        "y": 948,
+        "w": 314,
+        "h": 59,
+        "src": "/ui/budget/refresh.png"
+      }
+    }
+  },
+  "compare": {
+    "width": 1536,
+    "height": 1024,
+    "background": "/ui/compare/background.png",
+    "parts": {
+      "heading": {
+        "x": 520,
+        "y": 128,
+        "w": 491,
+        "h": 162,
+        "src": "/ui/compare/heading.png"
+      },
+      "second": {
+        "x": 108,
+        "y": 320,
+        "w": 616,
+        "h": 172,
+        "src": "/ui/compare/second-reference.png"
+      },
+      "first": {
+        "x": 813,
+        "y": 320,
+        "w": 616,
+        "h": 172,
+        "src": "/ui/compare/first-reference.png"
+      },
+      "table": {
+        "x": 108,
+        "y": 502,
+        "w": 1320,
+        "h": 316,
+        "src": "/ui/compare/table.png"
+      },
+      "submit": {
+        "x": 576,
+        "y": 824,
+        "w": 385,
+        "h": 55,
+        "src": "/ui/compare/submit.png"
+      },
+      "information": {
+        "x": 108,
+        "y": 883,
+        "w": 1320,
+        "h": 105,
+        "src": "/ui/compare/information.png"
+      }
+    }
+  },
+  "login": {
+    "width": 1024,
+    "height": 576,
+    "background": "/ui/login/background.png",
+    "parts": {
+      "card": {
+        "x": 829,
+        "y": 56,
+        "w": 184,
+        "h": 359,
+        "src": "/ui/login/card.png"
+      }
+    }
+  }
+}

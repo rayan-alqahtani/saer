@@ -1,0 +1,29 @@
+{
+  "run_dir": "models/image_price_hamoud_20261028",
+  "status": "approved",
+  "model_role": "image_only_price_estimator",
+  "approved_on": "2026-10-28",
+  "approval_basis": "User approved after inference-only reproduction of the report metrics.",
+  "source_repository": "https://github.com/mega-eng/car-PRICE-BY-AI",
+  "source_commit": "46c0345c4b5330b1d03a81c5f99cea44b1e03630",
+  "bundle": "models/image_price_hamoud_20261028/bundle.joblib",
+  "runtime": "models/image_price_hamoud_20261028/predict_image_price.py",
+  "sklearn_training_version": "1.6.1",
+  "evaluation": {
+    "split": "existing local test split; historically known",
+    "n_listings": 345,
+    "n_images": 1670,
+    "MAE_SAR": 15910.231320410896,
+    "MedAPE_pct": 10.66019766864062,
+    "R2": 0.8476282997926774,
+    "R2_log": 0.8971119696216711,
+    "within_10_pct": 47.2463768115942,
+    "within_20_pct": 75.94202898550725,
+    "within_30_pct": 88.1159420289855,
+    "coverage_80_pct": 80.8695652173913,
+    "coverage_90_pct": 92.17391304347827
+  },
+  "external_generalization": "not evaluated",
+  "rollback_pointer": "models/image_price_current_before_hamoud_20261028.json",
+  "note_ar": "تقدير من الصور فقط، لا يكشف الممشى أو الحالة، ولا يضمن سعر البيع. أرقام الاختبار إعادة إنتاج للتقرير وليست تقييمًا خارجيًا جديدًا."
+}

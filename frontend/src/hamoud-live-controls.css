@@ -1,0 +1,442 @@
+/* Native React controls around the original live demo HTML/CSS. */
+.hamoud-live-page {
+  box-sizing: border-box;
+  min-height: calc(100vh - 58px);
+}
+
+.hamoud-live-page *,
+.hamoud-live-page *::before,
+.hamoud-live-page *::after {
+  box-sizing: border-box;
+}
+
+.hamoud-live-page #mode-btn {
+  display: block;
+  flex: 0 0 auto !important;
+  width: auto !important;
+  min-width: 0 !important;
+  height: auto;
+  padding: 6px 12px;
+  border: 1px solid var(--cardb);
+  background: var(--card);
+  color: var(--ink);
+  font: inherit;
+  line-height: 1.3;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.hamoud-live-page .falling-night-flowers {
+  position: fixed;
+  z-index: 2000;
+  inset: 0;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(ellipse at center, #0a1d30 0%, #030e19 78%);
+  backdrop-filter: blur(9px);
+  pointer-events: auto;
+  animation: saer-loading-enter 0.24s ease-out both;
+}
+
+.hamoud-live-page .falling-night-flowers.is-closing {
+  animation: saer-loading-exit 0.5s ease-in both;
+}
+
+.hamoud-live-page .falling-night-flower-field {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.hamoud-live-page .falling-night-flower {
+  position: absolute;
+  display: block;
+  opacity: 0.96;
+  filter: drop-shadow(0 2px 8px rgba(232, 89, 155, 0.5));
+  will-change: transform, opacity;
+}
+
+.hamoud-live-page .falling-night-flower img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.hamoud-live-page .falling-night-loading {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  justify-items: center;
+  gap: 13px;
+  color: #e6f4f7;
+  text-align: center;
+  text-shadow: 0 0 18px rgba(0, 207, 238, 0.5);
+}
+
+.hamoud-live-page .falling-night-loading strong {
+  color: #fff;
+  font-size: clamp(32px, 5vw, 56px);
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+.hamoud-live-page .falling-night-loading span {
+  color: #bbd8df;
+  font-size: clamp(15px, 2vw, 20px);
+}
+
+.hamoud-live-page .falling-night-loading i {
+  width: 180px;
+  height: 4px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.hamoud-live-page .falling-night-loading b {
+  display: block;
+  width: 42%;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #168dd6, #19dded);
+  box-shadow: 0 0 12px #12d8f7;
+  animation: saer-loading-progress 1s ease-in-out infinite alternate;
+}
+
+@keyframes saer-loading-enter {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes saer-loading-exit {
+  to { opacity: 0; visibility: hidden; }
+}
+
+@keyframes saer-loading-progress {
+  to { transform: translateX(-140%); }
+}
+
+@keyframes saer-flower-rain {
+  0% { transform: translate3d(0, -18vh, 0) rotate(-18deg); }
+  100% { transform: translate3d(var(--flower-drift, 0px), 115vh, 0) rotate(385deg); }
+}
+
+.hamoud-live-workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr);
+  gap: 22px;
+  align-items: start;
+  direction: ltr;
+  margin: 24px 0 0;
+}
+
+.hamoud-live-result,
+.hamoud-live-upload-column {
+  min-width: 0;
+}
+
+.hamoud-live-result > .card {
+  height: 302px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: auto;
+  text-align: center;
+  direction: rtl;
+}
+
+.hamoud-live-result .empty-cars {
+  min-height: 65px;
+}
+
+.hamoud-live-result .legend {
+  width: min(100%, 370px);
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  text-align: right;
+  font-size: 0.9rem;
+}
+
+.hamoud-live-result .note {
+  max-width: 390px;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.hamoud-live-upload {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 302px;
+  padding: 42px 16px 16px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.025);
+  border-radius: 18px;
+  background: #292523;
+  color: #f4f0ec;
+  cursor: pointer;
+  text-align: center;
+  direction: rtl;
+}
+
+.hamoud-live-upload:focus-within {
+  outline: 2px solid #2a9d8f;
+  outline-offset: 2px;
+}
+
+.hamoud-live-upload input {
+  display: none;
+}
+
+.hamoud-live-count {
+  position: absolute;
+  top: 8px;
+  left: 9px;
+  z-index: 2;
+  max-width: calc(100% - 18px);
+  padding: 5px 9px;
+  border-radius: 6px;
+  background: #168e82;
+  color: white;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.hamoud-live-drop {
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  font-size: 15px;
+}
+
+.hamoud-live-drop b {
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.hamoud-live-drop i {
+  color: #9c9792;
+  font-style: normal;
+}
+
+.hamoud-live-thumbs {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr);
+  gap: 8px;
+}
+
+.hamoud-live-thumbs img {
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
+  border-radius: 8px;
+  background: #151515;
+  object-fit: contain;
+}
+
+.hamoud-live-estimate {
+  display: block;
+  width: 100%;
+  height: 39px;
+  margin: 14px 0 0;
+  cursor: pointer;
+  font: inherit;
+  font-size: 14px;
+}
+
+.hamoud-live-estimate:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+
+.hamoud-live-actions {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  width: calc(50% - 7px);
+  margin-top: 14px;
+  margin-inline-start: auto;
+}
+
+.hamoud-live-actions button.secondary {
+  min-height: 39px;
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+  justify-content: center;
+  border: 0 !important;
+  background: #585553 !important;
+  color: #f4f0eb !important;
+  box-shadow: none !important;
+}
+
+.hamoud-live-error {
+  margin: 8px 0 0;
+  color: #ff9d9d;
+  text-align: center;
+  font-size: 13px;
+}
+
+@media (max-width: 760px) {
+  .hamoud-live-page #mode-btn {
+    top: 100px;
+  }
+
+  .hamoud-live-workspace {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 14px;
+    margin-top: 18px;
+    direction: rtl;
+  }
+
+  .hamoud-live-upload-column {
+    grid-row: 1;
+  }
+
+  .hamoud-live-result {
+    grid-row: 2;
+  }
+
+  .hamoud-live-result > .card,
+  .hamoud-live-upload {
+    height: 260px;
+  }
+
+  .hamoud-live-thumbs img {
+    max-height: 100%;
+  }
+
+  .hamoud-live-actions {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hamoud-live-page .car,
+  .hamoud-live-page .cloud,
+  .hamoud-live-page .lily,
+  .hamoud-live-page .wh,
+  .hamoud-live-page .stars,
+  .hamoud-live-page .tail,
+  .hamoud-live-page .tail2,
+  .hamoud-live-page .heart {
+    animation: none;
+  }
+
+  .hamoud-live-page .falling-night-flower {
+    animation-duration: 1.2s !important;
+  }
+
+}
+
+/* Five source vehicle cutouts travel together on the same left-moving road lane. */
+.hamoud-live-page .road-traffic-track {
+  position: absolute;
+  z-index: 3;
+  left: 0;
+  bottom: 20px;
+  display: flex;
+  width: max-content;
+  direction: ltr;
+  animation: road-convoy-left 22s linear infinite;
+  will-change: transform;
+}
+
+.hamoud-live-page .road-vehicle-set {
+  display: flex;
+  flex-direction: row-reverse;
+  flex: none;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: clamp(8px, 1vw, 14px);
+  box-sizing: border-box;
+  width: max-content;
+  min-width: min(calc(100vw - 32px), 1100px);
+  padding-inline: 8px;
+  direction: ltr;
+}
+
+.hamoud-live-page .road-vehicle-item {
+  position: relative;
+  display: block;
+  flex: none;
+  line-height: 0;
+}
+
+.hamoud-live-page .road-vehicle-item img {
+  position: relative;
+  z-index: 1;
+  display: block;
+  height: auto;
+  object-fit: contain;
+}
+
+.hamoud-live-page .empty-cars .empty-car-photo {
+  display: block;
+  width: 110px;
+  height: auto;
+  object-fit: contain;
+}
+
+.demo-mode .hamoud-live-page .road-vehicle--car1 img,
+.demo-mode .hamoud-live-page .road-vehicle--car2 img {
+  width: clamp(47px, 12.25vw, 176px);
+}
+
+.demo-mode .hamoud-live-page .road-vehicle--car3 img {
+  width: clamp(54px, 14.4vw, 207px);
+}
+
+.demo-mode .hamoud-live-page .road-vehicle--car4 img {
+  width: clamp(52px, 13.95vw, 202px);
+}
+
+.demo-mode .hamoud-live-page .road-vehicle--car5 img {
+  width: clamp(43px, 11.25vw, 162px);
+}
+
+.hamoud-live-page .road-vehicle-beam {
+  position: absolute;
+  z-index: 0;
+  bottom: 22%;
+  left: -70%;
+  width: 70%;
+  height: 48%;
+  clip-path: polygon(100% 36%, 100% 64%, 0 100%, 0 0);
+  background: linear-gradient(270deg, rgba(255, 236, 162, 0.82), rgba(255, 225, 130, 0.34) 42%, rgba(255, 225, 130, 0));
+  mix-blend-mode: screen;
+  opacity: var(--beam);
+  pointer-events: none;
+  transition: opacity 0.6s;
+}
+
+@keyframes road-convoy-left {
+  to { transform: translateX(-50%); }
+}
+
+@media (max-width: 560px) {
+  .hamoud-live-page .road-traffic-track { animation-duration: 12s; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hamoud-live-page .road-traffic-track {
+    left: 0;
+    width: 100%;
+    transform: none;
+    animation: none;
+  }
+
+  .hamoud-live-page .road-vehicle-set {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .hamoud-live-page .road-vehicle-set--clone { display: none; }
+}

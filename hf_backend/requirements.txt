@@ -1,0 +1,29 @@
+--extra-index-url https://download.pytorch.org/whl/cpu
+numpy==2.5.3
+scipy==1.18.1
+scikit-learn==1.9.1
+joblib==1.6.0
+Pillow==11.3.0
+torch==2.14.1+cpu
+torchvision==0.29.1+cpu
+
+# حزمة تشغيل الويب كاملة: تبعيات النماذج، ومنها Pillow وTorch CPU.
+
+
+fastapi==0.162.0
+uvicorn[standard]==0.54.0
+SQLAlchemy==2.1.6
+python-multipart==0.0.32
+transformers==4.45.2
+safetensors==0.8.0
+pandas==2.3.3
+opencv-python-headless==4.14.0.94
+
+huggingface_hub==0.36.2
+
+# بيئة CPU الأساسية: REST وGradio والنموذجان الجدولي والهوية.
+
+gradio==5.49.1
+gradio-client==1.13.3
+pydantic==2.11.10
+starlette==0.52.1

@@ -1,0 +1,82 @@
+# بيئات التشغيل والاعتمادات والكاش
+.venv/
+.venv-*/
+venv/
+env/
+node_modules/
+**/node_modules/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.cache/
+.vite/
+.ipynb_checkpoints/
+
+# مخرجات بناء يمكن إعادة إنشائها
+dist/
+dist-demo/
+build/
+coverage/
+*.tsbuildinfo
+*.log
+
+# ملفات مؤقتة ومحلية وتقارير التحقق المولدة
+/tmp/
+/review/
+/backend/instance/
+/output/
+*.tmp
+*.temp
+*.swp
+*.bak
+.DS_Store
+Thumbs.db
+
+# أسرار حقيقية؛ تبقى القوالب متاحة للفريق
+.env
+.env.*
+.envrc
+!.env.example
+!.env.sample
+!.env.template
+!**/.env.example
+!**/.env.sample
+!**/.env.template
+*.pem
+*.key
+*.p12
+*.pfx
+credentials.json
+credentials-*.json
+service-account*.json
+
+# بيانات الطرف الثالث خارج المستودع العام، حتى لو استُخدمت محليًا.
+/data/raw/
+/data/recovery/
+/data/processed/*.csv
+/data/seed/*.sqlite
+*.joblib
+*.pt
+*.pth
+*.sqlite
+*.sqlite3
+*.npz
+*.xlsx
+*.zip
+/frontend/public/demo/img/**
+# لا تؤثر هذه القواعد على الملفات التي يتتبعها Git بالفعل.
+# تظل صور الواجهة متاحة؛ تراجع حقوق صور الإعلانات قبل إضافة المزيد.
+
+# بيئات وكاش التحقق المحلي
+.runtime/
+.runtime-cache/
+
+hf_backend/outputs/clip_identity_20261027_v1/checkpoint_compatibility.json
+
+# منع إعادة نشر بيانات الإعلانات والصور التي لا نملك حقوقها
+/data/
+/frontend/public/demo/img/
+*.parquet
+*.csv

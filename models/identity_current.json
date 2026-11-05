@@ -1,0 +1,52 @@
+{
+  "status": "final_approved_for_identity_mvp",
+  "approved_at": "2026-10-28",
+  "scope": [
+    "image identity: make and model"
+  ],
+  "tasks": {
+    "model": {
+      "artifact": "outputs/generalization_rescue_20261028_v1/model/candidate.joblib",
+      "sha256": "ce330fbe0491c3f8c9bd7dafb249f3e09bdad677077a9cadd220fa084af05156",
+      "baseline_test_top1": 0.9389830508474576,
+      "candidate_test_top1": 0.9457627118644067,
+      "paired_bootstrap_95_delta": [
+        -0.016949152542372836,
+        0.03050847457627115
+      ]
+    },
+    "make": {
+      "artifact": "outputs/generalization_rescue_20261028_v1/make/candidate.joblib",
+      "sha256": "5ffe4085ace9a9ab9cac22324f53dc10eec7b32a9e4cd201ed949308c029f433",
+      "baseline_test_top1": 0.9139240506329114,
+      "candidate_test_top1": 0.9189873417721519,
+      "paired_bootstrap_95_delta": [
+        -0.0151898734177216,
+        0.025316455696202556
+      ],
+      "note": "Macro-F1 decreased from 0.8976030232462727 to 0.8877511843656005"
+    }
+  },
+  "evaluation_note": "Historical test split was used in prior rounds; results are retrospective and not a blind external estimate.",
+  "not_changed": [
+    "color",
+    "body",
+    "search",
+    "price"
+  ],
+  "runtime_policy": "The joint Make|Model head is the sole identity source in the image tester. The standalone make head is retained for diagnostics and does not override the joint prediction.",
+  "diagnostic_make_head_used_in_interface": false,
+  "model_name": "DINOv2 + CLIP joint make|model identity head",
+  "active_task": "model",
+  "active_output": "joint Make|Model label; brand is parsed from that label",
+  "diagnostic_only": {
+    "task": "make",
+    "artifact": "outputs/generalization_rescue_20261028_v1/make/candidate.joblib",
+    "sha256": "5ffe4085ace9a9ab9cac22324f53dc10eec7b32a9e4cd201ed949308c029f433",
+    "use_in_ui": false
+  },
+  "not_a_price_model": true,
+  "final_approval_date": "2026-10-28",
+  "approved_scope": "Photo-to-identity: one joint Make|Model head in the image identity path.",
+  "approval_note": "Operational final choice requested by user. Evaluation gains are small on historical test and do not prove a decisive improvement or external commercial accuracy."
+}

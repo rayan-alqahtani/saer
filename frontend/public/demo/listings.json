@@ -1,0 +1,13 @@
+{
+  "items": [],
+  "total": 0,
+  "offset": 0,
+  "limit": 24,
+  "summary": {
+    "priced_count": 0,
+    "median_price": null,
+    "average_price": null,
+    "with_images": 0,
+    "image_coverage_pct": 0
+  }
+}

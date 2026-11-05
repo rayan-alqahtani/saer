@@ -1,0 +1,13 @@
+# حزمة تشغيل الويب كاملة: تبعيات النماذج، ومنها Pillow وTorch CPU.
+-r requirements-models.txt
+
+fastapi==0.162.0
+uvicorn[standard]==0.54.0
+SQLAlchemy==2.1.6
+python-multipart==0.0.32
+transformers==4.45.2
+safetensors==0.8.0
+pandas==2.3.3
+opencv-python-headless==4.14.0.94
+
+huggingface_hub==0.36.2

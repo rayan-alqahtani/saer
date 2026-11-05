@@ -1,0 +1,13 @@
+<!doctype html><html lang="ar" dir="rtl"><meta charset="utf-8"><title>اختبار محلي للسحب والذاكرة والتنقل</title>
+<label>ملفات الاختبار<input aria-label="ملفات الاختبار" type="file" multiple></label>
+<button id="drop">إسقاط الملفات داخل صفحة التقدير</button>
+<button id="refresh">تحديث العدادات</button>
+<output id="result" aria-live="polite"></output>
+<iframe title="الواجهة المختبرة" src="/estimate-from-image" style="width:100%;height:800px"></iframe>
+<script>
+const frame=document.querySelector('iframe'), active=new Set();let created=0,revoked=0,loads=0;
+function report(){document.querySelector('#result').textContent=JSON.stringify({created,revoked,active:active.size,documentLoads:loads});}
+frame.addEventListener('load',()=>{loads++;const u=frame.contentWindow.URL,make=u.createObjectURL.bind(u),remove=u.revokeObjectURL.bind(u);u.createObjectURL=v=>{let url=make(v);created++;active.add(url);return url;};u.revokeObjectURL=url=>{revoked++;active.delete(url);return remove(url);};report();});
+document.querySelector('#drop').onclick=()=>{const files=document.querySelector('input').files,dt=new DataTransfer();for(const f of files)dt.items.add(f);frame.contentDocument.querySelector('.hamoud-live-upload').dispatchEvent(new DragEvent('drop',{bubbles:true,cancelable:true,dataTransfer:dt}));report();};
+document.querySelector('#refresh').onclick=report;
+</script></html>

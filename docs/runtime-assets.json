@@ -1,0 +1,32 @@
+{
+  "models": [
+    {
+      "path": "models/image_price_hamoud_20261028/bundle.joblib",
+      "bytes": 5114410,
+      "sha256": "2fcbcc30f2a945ea9064bf887ab999127c575f22adb91865cf3db70857f278ea"
+    },
+    {
+      "path": "models/improvement_20261021T093545513846/price/best_model.joblib",
+      "bytes": 363504,
+      "sha256": "70779a29c3a20aedb7e17688a63abcb92f76169d6865dff1e808afd8f10566a2"
+    },
+    {
+      "path": "outputs/generalization_rescue_20261028_v1/model/candidate.joblib",
+      "bytes": 438661,
+      "sha256": "ce330fbe0491c3f8c9bd7dafb249f3e09bdad677077a9cadd220fa084af05156"
+    }
+  ],
+  "trained_weights_total_bytes": 5916575,
+  "local_source_head": "0f43ac1",
+  "source_branch": "demo-mode",
+  "public_encoders": "DINOv2, CLIP, ResNet18, SSDLite: downloaded at runtime by hf_backend/model_store.py; not vendored",
+  "raw_images_included": false,
+  "preprocessing": {
+    "image_price": "bundle.joblib contains components and q; frozen StandardScaler/PCA/SVR/Ridge preprocessing",
+    "specs_price": "best_model.joblib contains PriceModel features, encoder and estimator; custom classes in scripts/ml_price.py",
+    "identity": "candidate.joblib contains StandardScaler, LogisticRegression, normalization/config and 59 classes; feature extraction code in hf_backend/scripts"
+  },
+  "runtime_verified_on": "2026-11-02",
+  "complete_raw_images_included": false,
+  "image_worker_scikit_learn": "1.6.1"
+}

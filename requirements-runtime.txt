@@ -1,0 +1,6 @@
+# بيئة CPU الأساسية: REST وGradio والنموذجان الجدولي والهوية.
+-r requirements-web.txt
+gradio==5.49.1
+gradio-client==1.13.3
+pydantic==2.11.10
+starlette==0.52.1

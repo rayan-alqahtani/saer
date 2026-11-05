@@ -1,0 +1,18 @@
+{
+  "count": 0,
+  "count_with_listing_date": 0,
+  "median_price": null,
+  "average_price": null,
+  "min_price": null,
+  "max_price": null,
+  "median_mileage": null,
+  "price_bands": [],
+  "mileage_bands": [],
+  "by_make": [],
+  "by_model": [],
+  "by_city": [],
+  "by_vehicle_year": [],
+  "by_listing_year": [],
+  "year_range": null,
+  "notice": "لا تتضمن النسخة العامة بيانات إعلانات أو صورًا من مصادر خارجية. أضف بيانات مصرحًا بنشرها لتفعيل التصفح والتحليل."
+}

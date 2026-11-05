@@ -1,0 +1,13 @@
+# عامل مستقل بالكامل؛ لا --system-site-packages ولا PYTHONPATH.
+--extra-index-url https://download.pytorch.org/whl/cpu
+numpy==2.5.3
+scipy==1.18.1
+scikit-learn==1.6.1
+joblib==1.6.0
+pandas==2.3.3
+Pillow==11.3.0
+torch==2.5.1+cpu
+torchvision==0.20.1+cpu
+transformers==4.45.2
+huggingface_hub==0.36.2
+safetensors==0.8.0

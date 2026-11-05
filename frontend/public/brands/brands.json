@@ -1,0 +1,207 @@
+[
+  {
+    "make": "Audi",
+    "logo": "/brands/audi.svg",
+    "source": "Simple Icons v16.36.0"
+  },
+  {
+    "make": "BAIC",
+    "logo": null,
+    "source": "no_logo_in_selected_pack"
+  },
+  {
+    "make": "BMW",
+    "logo": "/brands/bmw.svg",
+    "source": "Simple Icons v16.36.0"
+  },
+  {
+    "make": "BYD",
+    "logo": null,
+    "source": "no_logo_in_selected_pack"
+  },
+  {
+    "make": "Cadillac",
+    "logo": "/brands/cadillac.svg",
+    "source": "Simple Icons v16.36.0"
+  },
+  {
+    "make": "Changan",
+    "logo": null,
+    "source": "no_logo_in_selected_pack"
+  },
+  {
+    "make": "Chery",
+    "logo": null,
+    "source": "no_logo_in_selected_pack"
+  },
+  {
+    "make": "Chevrolet",
+    "logo": "/brands/chevrolet.svg",
+    "source": "Simple Icons v16.36.0"
+  },
+  {
+    "make": "Chrysler",
+    "logo": "/brands/chrysler.svg",
+    "source": "Simple Icons v16.36.0"
+  },
+  {
+    "make": "Deepal",
+    "logo": null,
+    "source": "no_logo_in_selected_pack"
+  },
+  {
+    "make": "Dodge",
+    "logo": null,
+    "source": "no_logo_in_selected_pack"
+  },
+  {
+    "make": "Dongfeng",
+    "logo": null,
+    "source": "no_logo_in_selected_pack"
+  },
+  {
+    "make": "Ford",
+    "logo": "/brands/ford.svg",
+    "source": "Simple Icons v16.36.0"
+  },
+  {
+    "make": "GAC",
+    "logo": null,
+    "source": "no_logo_in_selected_pack"
+  },
+  {
+    "make": "Geely",
+    "logo": null,
+    "source": "no_logo_in_selected_pack"
+  },
+  {
+    "make": "Genesis",
+    "logo": null,
+    "source": "no_logo_in_selected_pack"
+  },
+  {
+    "make": "GMC",
+    "logo": null,
+    "source": "no_logo_in_selected_pack"
+  },
+  {
+    "make": "Great Wall",
+    "logo": null,
+    "source": "no_logo_in_selected_pack"
+  },
+  {
+    "make": "Haval",
+    "logo": null,
+    "source": "no_logo_in_selected_pack"
+  },
+  {
+    "make": "Honda",
+    "logo": "/brands/honda.svg",
+    "source": "Simple Icons v16.36.0"
+  },
+  {
+    "make": "Hongqi",
+    "logo": null,
+    "source": "no_logo_in_selected_pack"
+  },
+  {
+    "make": "Hyundai",
+    "logo": "/brands/hyundai.svg",
+    "source": "Simple Icons v16.36.0"
+  },
+  {
+    "make": "Jaecoo",
+    "logo": null,
+    "source": "no_logo_in_selected_pack"
+  },
+  {
+    "make": "Jeep",
+    "logo": "/brands/jeep.svg",
+    "source": "Simple Icons v16.36.0"
+  },
+  {
+    "make": "Jetour",
+    "logo": null,
+    "source": "no_logo_in_selected_pack"
+  },
+  {
+    "make": "Kia",
+    "logo": "/brands/kia.svg",
+    "source": "Simple Icons v16.36.0"
+  },
+  {
+    "make": "Lexus",
+    "logo": null,
+    "source": "no_logo_in_selected_pack"
+  },
+  {
+    "make": "Lynk & Co",
+    "logo": null,
+    "source": "no_logo_in_selected_pack"
+  },
+  {
+    "make": "Mazda",
+    "logo": "/brands/mazda.svg",
+    "source": "Simple Icons v16.36.0"
+  },
+  {
+    "make": "Mercedes",
+    "logo": null,
+    "source": "no_logo_in_selected_pack"
+  },
+  {
+    "make": "MG",
+    "logo": "/brands/mg.svg",
+    "source": "Simple Icons v16.36.0"
+  },
+  {
+    "make": "MINI",
+    "logo": "/brands/mini.svg",
+    "source": "Simple Icons v16.36.0"
+  },
+  {
+    "make": "Mitsubishi",
+    "logo": "/brands/mitsubishi.svg",
+    "source": "Simple Icons v16.36.0"
+  },
+  {
+    "make": "Nissan",
+    "logo": "/brands/nissan.svg",
+    "source": "Simple Icons v16.36.0"
+  },
+  {
+    "make": "Omoda",
+    "logo": null,
+    "source": "no_logo_in_selected_pack"
+  },
+  {
+    "make": "Porsche",
+    "logo": "/brands/porsche.svg",
+    "source": "Simple Icons v16.36.0"
+  },
+  {
+    "make": "Soueast",
+    "logo": null,
+    "source": "no_logo_in_selected_pack"
+  },
+  {
+    "make": "SsangYong",
+    "logo": null,
+    "source": "no_logo_in_selected_pack"
+  },
+  {
+    "make": "Suzuki",
+    "logo": "/brands/suzuki.svg",
+    "source": "Simple Icons v16.36.0"
+  },
+  {
+    "make": "Toyota",
+    "logo": "/brands/toyota.svg",
+    "source": "Simple Icons v16.36.0"
+  },
+  {
+    "make": "Volkswagen",
+    "logo": "/brands/volkswagen.svg",
+    "source": "Simple Icons v16.36.0"
+  }
+]
