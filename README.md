@@ -10,7 +10,7 @@
 
 <br>
 
-<img src="docs/assets/readme-hero.svg" width="100%" alt="SAER — illustration of a car and verified project statistics: 2,742 advertisements, 13,416 image records, six Saudi cities, and three model paths" />
+<img src="docs/assets/readme-hero.png"" width="100%" alt="SAER — illustration of a car and verified project statistics: 2,742 advertisements, 13,416 image records, six Saudi cities, and three model paths" />
 
 <br>
 
