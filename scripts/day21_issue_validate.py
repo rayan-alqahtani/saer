@@ -67,7 +67,7 @@ def issue_checks(processed, listings, images, schema, summary):
           and manifest["split_fingerprint"] == split_hash and manifest["input_files_sha256"] == hashes
           and all(r["split"] == old_l[r["listing_uid"]]["split"] for r in listings)
           and len(changed) == 43 and changed == {r["listing_uid"] for r in read_csv(base / "historical_split_changes.csv")} )
-    q = [r for r in read_csv(processed / "quarantine_listings.csv") if r["source_dataset"] == "CarInsight_KG"]
+    q = [r for r in read_csv(processed / "quarantine_listings.csv") if r["source_dataset"] == "external_group_c"]
     reasons = {r["listing_uid"]: r["quarantine_reasons"] for r in read_csv(base / "kg_quarantine_reasons.csv")}
     check("KG", "كل إعلان KG المعزول له سبب ظاهر في سجل المراجعة، ولا أدخلت سجلات المعزولين في التدريب",
           len(q) == 20 and reasons == {r["listing_uid"]: r["quarantine_reasons"] for r in q}

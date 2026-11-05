@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1672" height="941" viewBox="0 0 1672 941" role="img" aria-label="غلاف مشروع سعّر العربي: 2742 إعلانًا تاريخيًا و13416 سجل صورة وست مدن سعودية وثلاثة مسارات نماذج">
+<defs>
+<linearGradient id="bg" x2="1" y2="1"><stop stop-color="#06152d"/><stop offset=".5" stop-color="#092b50"/><stop offset="1" stop-color="#06152e"/></linearGradient>
+<linearGradient id="logo" x2="0" y2="1"><stop stop-color="#2378b9"/><stop offset="1" stop-color="#1461a4"/></linearGradient>
+<linearGradient id="card" x2="0" y2="1"><stop stop-color="#103b65"/><stop offset="1" stop-color="#09233f"/></linearGradient>
+<pattern id="grid" width="62" height="62" patternUnits="userSpaceOnUse"><path d="M62 0H0V62" fill="none" stroke="#3a9bd2" stroke-opacity=".05"/></pattern>
+<filter id="glow"><feGaussianBlur stdDeviation="30"/></filter>
+</defs>
+<rect width="1672" height="941" rx="25" fill="url(#bg)"/><rect width="1672" height="941" rx="25" fill="url(#grid)"/>
+<circle cx="1370" cy="85" r="350" fill="#058ad7" opacity=".12" filter="url(#glow)"/>
+<circle cx="420" cy="460" r="315" fill="#008ed0" opacity=".13" filter="url(#glow)"/>
+<path d="M60 55H342" stroke="#10d9f6" stroke-width="6" stroke-linecap="round"/><path d="M1320 55H1600" stroke="#138fb9" stroke-width="5" stroke-linecap="round"/>
+<circle cx="83" cy="282" r="3" fill="#03daf7"/><circle cx="887" cy="348" r="3" fill="#03daf7"/>
+<rect x="121" y="212" width="700" height="346" rx="69" fill="url(#logo)"/>
+<g fill="#fff" font-family="Arial, sans-serif" font-weight="800">
+<text x="388" y="302" font-size="93" text-anchor="middle" direction="rtl">سعّر</text>
+</g>
+<circle cx="743" cy="255" r="31" fill="#f6a926"/><path d="M743 275V237M743 237l-16 16M743 237l16 16" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="743" cy="332" r="31" fill="#e84c50"/><path d="M743 312v38M743 350l-16-16M743 350l16-16" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<g transform="translate(161 305)">
+<path d="M0 117l68-34 164-27 89-77q14-13 40-13h139q32 0 64 24l72 54 48 13 31 15q12 10 12 31v25l-20 15h-40a70 70 0 0 0-138 0H213a70 70 0 0 0-138 0H29l-29-17z" fill="#fff"/>
+<path d="M327-15h162q21 0 47 18l51 38H294z" fill="#195c9c"/>
+<path d="M427-12v54M275 43l-4 109M547 50v96" stroke="#185f9b" stroke-width="4" fill="none"/>
+<path d="M338 53h35M460 53h34" stroke="#1e7dbb" stroke-width="6" stroke-linecap="round"/>
+<rect x="-9" y="124" width="54" height="20" rx="5" fill="#093458"/><rect x="654" y="124" width="54" height="20" rx="5" fill="#093458"/>
+<g><circle cx="144" cy="151" r="63" fill="#133d6c"/><circle cx="144" cy="151" r="46" fill="#fff"/><circle cx="144" cy="151" r="35" fill="#1b6aa7"/><circle cx="144" cy="151" r="12" fill="#fff"/>
+<circle cx="558" cy="151" r="63" fill="#133d6c"/><circle cx="558" cy="151" r="46" fill="#fff"/><circle cx="558" cy="151" r="35" fill="#1b6aa7"/><circle cx="558" cy="151" r="12" fill="#fff"/></g>
+<g stroke="#fff" stroke-width="7"><path d="M144 116v70M109 151h70M119 126l50 50M119 176l50-50M558 116v70M523 151h70M533 126l50 50M533 176l50-50"/></g>
+</g>
+<g font-family="Arial, DejaVu Sans, sans-serif" text-anchor="middle" direction="rtl">
+<text x="1266" y="168" fill="#58d9f5" font-size="44" font-weight="700">مشروع التخرج</text>
+<text x="1262" y="322" fill="#fff" font-size="148" font-weight="800">سعّر</text>
+<text x="1260" y="410" fill="#fff" font-size="49" font-weight="700">من السيارة إلى تقدير أكثر وعيًا</text>
+<text x="1272" y="487" fill="#bdd2e9" font-size="34">التسعير / الرؤية / استكشاف السوق</text>
+</g>
+<path d="M933 517h658" stroke="#32bfe8" stroke-width="2"/>
+<g font-family="Arial, DejaVu Sans, sans-serif">
+<rect x="59" y="630" width="369" height="178" rx="28" fill="url(#card)" stroke="#247aaa" stroke-width="2"/>
+<rect x="453" y="630" width="367" height="178" rx="28" fill="url(#card)" stroke="#247aaa" stroke-width="2"/>
+<rect x="844" y="630" width="367" height="178" rx="28" fill="url(#card)" stroke="#247aaa" stroke-width="2"/>
+<rect x="1236" y="630" width="367" height="178" rx="28" fill="url(#card)" stroke="#247aaa" stroke-width="2"/>
+<g fill="#f8fcff" font-size="76" font-weight="800"><text x="95" y="722">2,742</text><text x="487" y="722">13,416</text><text x="880" y="722">06</text><text x="1275" y="722">03</text></g>
+<g fill="#57e5f5" font-size="33" font-weight="700" direction="rtl"><text x="94" y="775">إعلانًا تاريخيًا</text><text x="488" y="775">سجل صور</text><text x="880" y="775">مدن سعودية</text><text x="1270" y="775">مسارات النماذج</text></g>
+</g></svg>

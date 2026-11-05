@@ -31,8 +31,8 @@ def validate(check_raw=True):
     check("T-D01b", "كل سجل مرتبط بمصدره ومعرّفه الأصلي", all(r["listing_uid"] == uid(r["source_dataset"], r["source_listing_id"]) for r in listings + quarantine))
     check("T-D03a", "لا فقد صامت ولا تداخل بين المعتمد والمعزول", not lid & qid and lid | qid == expected_ids, {"raw": len(expected_ids), "accepted": len(lid), "quarantined": len(qid)})
     check("T-D02a", "كل صورة معتمدة مرتبطة بإعلانها ومعرّف مصدرها المطابق",
-          all(r["listing_uid"] in lid and r["source_url"].startswith("https://cdn.syarah.com/")
-              and "/posts/" + by_id[r["listing_uid"]]["syarah_id"] + "/" in r["source_url"] for r in images))
+          all(r["listing_uid"] in lid and r["source_url"].startswith("https://cdn.example.invalid/")
+              and "/posts/" + by_id[r["listing_uid"]]["external_listing_id"] + "/" in r["source_url"] for r in images))
     counts = Counter(r["listing_uid"] for r in images)
     check("T-D02b", "كل إعلان معتمد له صور صحيحة وعددها مطابق", all(counts[r["listing_uid"]] == int(r["n_images"]) and counts[r["listing_uid"]] > 0 for r in listings))
     required = ["make", "model", "year", "sar_price", "condition", "city", "transmission", "type_fuel"]
@@ -187,7 +187,7 @@ def validate(check_raw=True):
               events.keys() == queue.keys()
               and len(events) == summary["enrichment"]["queue_size"]
               and all_rows_by_uid.keys() >= events.keys()
-              and all(record["syarah_id"] == queue[key]["syarah_id"] == all_rows_by_uid[key]["syarah_id"] for key, record in events.items()))
+              and all(record["external_listing_id"] == queue[key]["external_listing_id"] == all_rows_by_uid[key]["external_listing_id"] for key, record in events.items()))
         paths = {r["parsed_path"] for r in events.values() if r["status"] == "ok"}
         for row in listings + quarantine:
             paths.update(p["path"] for p in json.loads(row["field_provenance"]).values()
@@ -195,9 +195,9 @@ def validate(check_raw=True):
         paths.update(r["page_evidence"] for r in images if r.get("page_evidence", "").endswith(".json"))
         with ThreadPoolExecutor(max_workers=4) as pool:
             pages = dict(pool.map(inspect_saved_page, sorted(paths)))
-        identity_ok = all(str(pages[record["parsed_path"]]["syarah_id"]) == all_rows_by_uid[key]["syarah_id"]
+        identity_ok = all(str(pages[record["parsed_path"]]["external_listing_id"]) == all_rows_by_uid[key]["external_listing_id"]
                           for key, record in events.items() if record["status"] == "ok")
-        identity_ok &= all(str(pages[evidence["path"]]["syarah_id"]) == row["syarah_id"]
+        identity_ok &= all(str(pages[evidence["path"]]["external_listing_id"]) == row["external_listing_id"]
                            for row in listings + quarantine for evidence in json.loads(row["field_provenance"]).values()
                            if evidence.get("path") in pages)
         check("T-D-ENRICH-EVIDENCE", "كل دليل استكمال مطابق لهوية المصدر وHTML وبصمته ووسوم معرضه", len(pages) == len(paths) and identity_ok, {"verified_pages": len(pages)})
@@ -208,7 +208,7 @@ def validate(check_raw=True):
                 continue
             page = pages.get(image["page_evidence"])
             filename = urlsplit(image["source_url"]).path.rsplit("/", 1)[-1]
-            if not page or str(page["syarah_id"]) != by_id[image["listing_uid"]]["syarah_id"] or not any(
+            if not page or str(page["external_listing_id"]) != by_id[image["listing_uid"]]["external_listing_id"] or not any(
                 filename in {urlsplit(photo["url"]).path.rsplit("/", 1)[-1], urlsplit(photo.get("gallery_url", photo["url"])).path.rsplit("/", 1)[-1]}
                 and photo["image_kind"] == image["image_kind"] for photo in page["photos"]
             ):
