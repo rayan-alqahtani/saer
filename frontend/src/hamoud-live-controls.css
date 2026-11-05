@@ -36,11 +36,11 @@
   background: radial-gradient(ellipse at center, #0a1d30 0%, #030e19 78%);
   backdrop-filter: blur(9px);
   pointer-events: auto;
-  animation: siyarad-loading-enter 0.24s ease-out both;
+  animation: saer-loading-enter 0.24s ease-out both;
 }
 
 .hamoud-live-page .falling-night-flowers.is-closing {
-  animation: siyarad-loading-exit 0.5s ease-in both;
+  animation: saer-loading-exit 0.5s ease-in both;
 }
 
 .hamoud-live-page .falling-night-flower-field {
@@ -101,23 +101,23 @@
   border-radius: inherit;
   background: linear-gradient(90deg, #168dd6, #19dded);
   box-shadow: 0 0 12px #12d8f7;
-  animation: siyarad-loading-progress 1s ease-in-out infinite alternate;
+  animation: saer-loading-progress 1s ease-in-out infinite alternate;
 }
 
-@keyframes siyarad-loading-enter {
+@keyframes saer-loading-enter {
   from { opacity: 0; }
   to { opacity: 1; }
 }
 
-@keyframes siyarad-loading-exit {
+@keyframes saer-loading-exit {
   to { opacity: 0; visibility: hidden; }
 }
 
-@keyframes siyarad-loading-progress {
+@keyframes saer-loading-progress {
   to { transform: translateX(-140%); }
 }
 
-@keyframes siyarad-flower-rain {
+@keyframes saer-flower-rain {
   0% { transform: translate3d(0, -18vh, 0) rotate(-18deg); }
   100% { transform: translate3d(var(--flower-drift, 0px), 115vh, 0) rotate(385deg); }
 }

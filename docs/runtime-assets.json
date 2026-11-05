@@ -27,8 +27,6 @@
     "identity": "candidate.joblib contains StandardScaler, LogisticRegression, normalization/config and 59 classes; feature extraction code in hf_backend/scripts"
   },
   "runtime_verified_on": "2026-11-02",
-  "sample_image_included": "frontend/public/demo/img/sample-1186/04.webp",
   "complete_raw_images_included": false,
-  "verification": "RUNTIME_VERIFICATION.json",
   "image_worker_scikit_learn": "1.6.1"
 }

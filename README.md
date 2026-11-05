@@ -6,11 +6,11 @@
 
 **من صورة سيارة أو مواصفاتها… إلى تقدير مدعوم بالبيانات.**
 
-منصة عربية تجريبية لتقدير أسعار إعلانات السيارات المستعملة، والتعرّف على الماركة والموديل، واستكشاف بيانات سوق السيارات السعودي.
+منصة عربية تجريبية لتقدير أسعار إعلانات السيارات المستعملة، والتعرّف على الماركة والموديل، وعرض أدوات استكشاف بيانات السيارات عند توفر بيانات مصرح بها.
 
 <br>
 
-<img src="docs/assets/readme-hero.png.png" width="100%" alt="غلاف مشروع سعّر العربي — 2,742 إعلانًا تاريخيًا، 13,416 سجل صورة، 6 مدن سعودية، و3 مسارات للنماذج" />
+<img src="docs/assets/readme-hero.png.png" width="100%" alt="غلاف رسومي لمشروع سعّر" />
 
 <br>
 
@@ -28,12 +28,12 @@
 
 <br>
 
-[**الواجهة**](#-واجهة-سعر) · [**البيانات**](#-بيانات-المشروع--data-at-a-glance) · [**نتائج النماذج**](#-نتائج-النماذج--model-results) · [**كيف يعمل؟**](#-كيف-يعمل-سعر) · [**التشغيل**](#-quick-start) · [**الفريق**](#-فريق-التطوير--the-team)
+[**الواجهة**](#-واجهة-سعر) · **البيانات** · [**نتائج النماذج**](#-نتائج-النماذج--model-results) · [**كيف يعمل؟**](#-كيف-يعمل-سعر) · [**التشغيل**](#-quick-start) · [**الفريق**](#-فريق-التطوير--the-team)
 
 </div>
 
 > [!IMPORTANT]
-> **نسخة أكاديمية تجريبية، وليست خدمة تسعير تجارية.** جميع بيانات الإعلانات تاريخية، ونتائج النماذج تقديرية وليست أسعار بيع مضمونة. يعمل الرابط المنشور كواجهة ثابتة على Cloudflare Pages؛ أما التنبؤات فتتطلب خدمة Python منفصلة قيد التشغيل. قد تختلف نسخة الموقع المنشورة عن آخر تحديث في هذا المستودع.
+> **نسخة أكاديمية تجريبية، وليست خدمة تسعير تجارية.** لا تتضمن النسخة العامة سجلات الإعلانات الأصلية أو صورها. نتائج النماذج تقديرية وليست أسعار بيع مضمونة. يعمل الرابط المنشور كواجهة ثابتة على Cloudflare Pages؛ أما التنبؤات فتتطلب خدمة Python منفصلة قيد التشغيل. قد تختلف نسخة الموقع المنشورة عن آخر تحديث في هذا المستودع.
 
 ---
 
@@ -53,67 +53,26 @@
 
 <table>
 <tr>
-<td width="50%" align="center"><strong>استعراض الإعلانات</strong><br><sub>بحث وتصفية داخل مجموعة الإعلانات التاريخية</sub><br><img src="docs/assets/listings-screen.jpg" width="100%" alt="صفحة استعراض الإعلانات" /></td>
-<td width="50%" align="center"><strong>تحليل السوق</strong><br><sub>مؤشرات ورسوم وصفية للبيانات المسجلة</sub><br><img src="docs/assets/market-screen.jpg" width="100%" alt="لوحة تحليل السوق" /></td>
+<td width="50%" align="center"><strong>استعراض الإعلانات</strong><br><sub>واجهة التصفح؛ البيانات الأصلية غير مرفقة</sub><br><img src="docs/assets/listings-screen.jpg" width="100%" alt="صفحة استعراض الإعلانات" /></td>
+<td width="50%" align="center"><strong>تحليل السوق</strong><br><sub>واجهة التحليل؛ تتطلب بيانات مرخصة</sub><br><img src="docs/assets/market-screen.jpg" width="100%" alt="لوحة تحليل السوق" /></td>
 </tr>
 </table>
 
-<sub>تفاصيل ومصدر اللقطات: [توثيق الصور](docs/assets/README.md). الأسعار المعروضة في الإعلانات أسعار طلب مسجلة وليست نتائج تنبؤ.</sub>
+<sub>[تفاصيل الصور](docs/assets/README.md): لقطات أرشيفية للواجهة قبل إزالة البيانات؛ لا تمثل بيانات النسخة العامة.</sub>
 
 ---
 
-<a id="-بيانات-المشروع--data-at-a-glance"></a>
-## 📊 بيانات المشروع | Data at a glance
+## 📊 البيانات في النسخة العامة
 
-<div align="center">
-<table>
-<tr>
-<td align="center" width="25%"><h2>2,742</h2><sub>إعلان سيارة تاريخي</sub></td>
-<td align="center" width="25%"><h2>13,416</h2><sub>سجل صورة في البيانات</sub></td>
-<td align="center" width="25%"><h2>6</h2><sub>مدن سعودية</sub></td>
-<td align="center" width="25%"><h2>2018–2026</h2><sub>سنوات الموديلات الممثلة</sub></td>
-</tr>
-</table>
-</div>
+أزيلت ملفات الإعلانات والصور المأخوذة من مصادر خارجية من الإصدار الجاري. تظل واجهة استعراض الإعلانات والتحليل متاحة، لكنها تعرض حالة فارغة حتى يُضاف مصدر بيانات مسموح بمشاركته. لا تمثل لقطات الشاشة بيانات متاحة ضمن النسخة الحالية.
 
-<img src="docs/assets/readme-data.svg" width="100%" alt="توزيع 2742 إعلانًا تاريخيًا: الرياض 1818، القريات 397، جدة 335، الدمام 184، المدينة 5، نجران 3" />
-
-| المدينة | عدد الإعلانات | نسبة المجموعة الكاملة |
-|:---|---:|---:|
-| الرياض | **1,818** | **66.3%** |
-| القريات | 397 | 14.5% |
-| جدة | 335 | 12.2% |
-| الدمام | 184 | 6.7% |
-| المدينة المنورة | 5 | 0.2% |
-| نجران | 3 | 0.1% |
-| **الإجمالي** | **2,742** | **100%** |
-
-<sub>حُسبت النسب من أعداد المدن الواردة في عرض المشروع، وقد تختلف نسب مجموعات التدريب الفرعية عن إجمالي الإعلانات. الأرقام تقريبية إلى منزلة عشرية واحدة.</sub>
-
-**كيف جُهزت عينة التسعير؟**
-
-```text
-2,742  إعلانات تاريخية
-  │
-  ├── استبعاد 438 سيارة جديدة (خارج نطاق المستعمل)
-  ├── استبعاد  11 سيارة بممشى غير معتاد
-  ▼
-2,293  إعلانًا في مجموعة السعر
-  │
-  ├── تدريب   1,591
-  ├── تحقق      357
-  └── اختبار    345
-```
-
-> [!NOTE]
-> **13,416** تمثل سجلات الصور في البيانات، **وليست** 13,416 ملف صورة متاحًا للتنزيل من المستودع. المستودع العام يحتوي صورة إعلان أصلية واحدة ضمن العينة، مع ملفات صور خاصة بالتصميم والواجهة. راجع [حدود صور العينة](docs/SAMPLE_IMAGES.md).
+تفاصيل نطاق النشر: [سياسة البيانات](docs/DATA_POLICY.md).
 
 ---
 
-<a id="-نتائج-النماذج--model-results"></a>
 ## 🧠 نتائج النماذج | Model results
 
-تتكون المنصة من **3 مسارات نمذجة مستقلة**: تقدير السعر من المواصفات، وتقدير السعر من الصورة، واقتراح هوية السيارة. هذه النتائج **داخلية/تاريخية** وليست اختبارًا خارجيًا على السوق الحالي.
+تتكون المنصة من **3 مسارات نمذجة مستقلة**: تقدير السعر من المواصفات، وتقدير السعر من الصورة، واقتراح هوية السيارة. هذه نتائج بحثية تاريخية وليست اختبارًا على بيانات المستودع العامة الحالية أو على السوق الحالي.
 
 <table>
 <tr>
@@ -129,7 +88,7 @@
 <p><strong>DINOv2 + CLIP</strong><br>مع SVR / Ridge ensemble</p>
 <p><strong>10.66%</strong><br>Median absolute percentage error</p>
 <p><strong>15,910.23 ر.س</strong><br>MAE على عينة اختبار تاريخية</p>
-<sub>345 إعلانًا / 1,670 صورة في اختبار النموذج المحفوظ.</sub>
+<sub>قيم أرشيفية مرجعية وليست اختبارًا جديدًا.</sub>
 </td>
 <td width="33%" valign="top">
 <h3>03 · هوية السيارة</h3>
@@ -141,10 +100,9 @@
 </tr>
 </table>
 
-### دقة نموذج السعر من الصورة — على الاختبار التاريخي
+تعرض مؤشرات النماذج القديمة في الملفات المرجعية للسياق البحثي، وليست اختبارًا على البيانات التي يتيحها هذا المستودع الآن. لا يمكن إعادة إنتاج التقييم الأصلي دون البيانات وحقوق استخدامها.
 
-| المؤشر | القيمة | التفسير |
-|:---|---:|:---|
+---|---:|:---|
 | **MedAPE** | **10.66%** | وسيط نسبة الخطأ المطلق |
 | **MAE** | **15,910.23 ر.س** | متوسط الخطأ المطلق بالريال |
 | **R²** | **0.8476** | جودة الملاءمة على مجموعة الاختبار المحددة |
@@ -179,10 +137,10 @@
 | 💰 **تقدير سعر السيارة من المواصفات** | مدخلات منظمة ← سعر إعلان تقديري بالريال |
 | 📷 **تقدير السعر من الصورة** | رفع صورة ← تقدير تجريبي ونطاقات تنبؤ |
 | 🚘 **التعرّف على الماركة والموديل** | اقتراح هوية السيارة من صورة مع تأكيد المستخدم |
-| 🔎 **استعراض الإعلانات** | البحث والتصفية في البيانات التاريخية |
-| 🎯 **اقتراح سيارات حسب الميزانية** | عرض ما يصل إلى 5 خيارات بحسب الميزانية |
-| ⚖️ **مقارنة سيارتين** | مقارنة المواصفات وأسعار الطلب المسجلة |
-| 📈 **تحليل السوق** | مؤشرات ورسوم وصفية للعينة التاريخية |
+| 🔎 **استعراض الإعلانات** | البحث والتصفية عند توفر بيانات مصرح بها |
+| 🎯 **اقتراح سيارات حسب الميزانية** | اقتراح خيارات عند توفير البيانات |
+| ⚖️ **مقارنة سيارتين** | مقارنة مواصفات وبيانات متاحة |
+| 📈 **تحليل السوق** | مؤشرات وصفية بعد إضافة البيانات |
 
 ---
 
@@ -191,7 +149,7 @@
 ```mermaid
 flowchart LR
     A["المستخدم · واجهة RTL"] --> B["React + TypeScript"]
-    B --> C["البيانات التاريخية · JSON / SQLite"]
+    B --> C["بيانات مصرّح بها · JSON / SQLite"]
     B -. "عند تشغيل الخدمة" .-> D["Python · FastAPI / Gradio"]
     D --> E["01 · تسعير المواصفات"]
     D --> F["02 · تسعير الصورة"]
@@ -229,7 +187,7 @@ Copy-Item frontend/.env.example frontend/.env.local
 pnpm --dir frontend dev
 ```
 
-Open **http://127.0.0.1:5173** and choose guest access. Historical browsing does not require a model server. The public repository can be cloned without an invitation.
+Open **http://127.0.0.1:5173** and choose guest access. Browsing works without a model server, but the public repository contains no advertisement records. The public repository can be cloned without an invitation.
 
 ### 2. Enable local model inference
 
@@ -253,7 +211,7 @@ With the frontend still running, open:
 
 The first encoder restore needs internet access and disk space. After restoration, the launch script verifies the cache and starts offline inference. It reports an error when assets or the service are unavailable; it does not substitute saved predictions.
 
-**[Full setup guide →](docs/SETUP.md)** includes environment checks, exact CPU versions, REST startup, configuration, fresh-result verification, build commands, and backup restoration. The tested platform is Windows x64 with 16 GB RAM; other platforms and GPU configurations have not been verified with these locks.
+**[دليل التشغيل](docs/SETUP.md)** يوضح تثبيت الواجهة وتشغيلها دون نشر بيانات خارجية. The tested platform is Windows x64 with 16 GB RAM; other platforms and GPU configurations have not been verified with these locks.
 
 <a name="team"></a>
 
@@ -267,10 +225,10 @@ The first encoder restore needs internet access and disk space. After restoratio
 
 | Path | Purpose |
 |---|---|
-| [`frontend/`](frontend/) | Arabic RTL interface, design assets, and historical demo exports |
+| [`frontend/`](frontend/) | Arabic RTL interface and design assets; empty public demo data |
 | [`backend/`](backend/) · [`hf_backend/`](hf_backend/) | REST API and the Gradio model service |
 | [`models/`](models/) · [`outputs/`](outputs/) | Approved runtime artifacts, pointers, and model code |
-| [`data/`](data/) | Selected processed tables and the SQLite seed; not the full photo dataset |
+| `data/` | Local data directory, excluded from public commits |
 | [`scripts/`](scripts/) · [`tools/`](tools/) | Existing ML code, runtime workers, verification, and recovery tools |
 | [`tests/`](tests/) · [`docs/`](docs/) | Frontend behavior tests, setup guides, and verification records |
 
@@ -282,11 +240,11 @@ The first encoder restore needs internet access and disk space. After restoratio
 |---|---|
 | [Setup & configuration](docs/SETUP.md) | Reproducible PowerShell instructions and operating notes, in English |
 | [Model design & scope](ML_SPEC.md) | Original design and subsequent model decisions; early alternatives are not all implemented |
-| [Data contract](DATA_CONTRACT.md) | Dataset conventions, cleaning, and provenance requirements |
-| [Verification after unification](docs/UNIFICATION_VERIFICATION.json) | Actual build, frontend, and local model checks |
-| [Reproducibility report](docs/PHASE4_REPRODUCIBILITY.md) | Independent environments, cache use, and remaining installation limits |
-| [Delivery & presentation guide](DELIVERY.md) | Current handoff state, demonstration steps, snapshots, and history |
-| [Project progress](PROGRESS.md) | Dated implementation and verification records |
+| [Data policy](docs/DATA_POLICY.md) | Public data scope and redistribution precautions |
+
+
+
+
 
 <details>
 <summary><strong>Scope, limitations & attribution</strong></summary>
@@ -295,6 +253,6 @@ The first encoder restore needs internet access and disk space. After restoratio
 - Not every flow, device size, or external image source has been tested. Cached encoders were verified; a complete fresh download on another machine remains untested.
 - The separate image-price artifact retains its upstream provenance in [the model pointer](models/image_price_current.json). Identity diagnostics mentioned in older metadata are not additional active models in the interface.
 - The Cairo font includes its [SIL Open Font License](frontend/public/fonts/OFL.txt). No repository-wide software license is declared, and no blanket redistribution rights are asserted for third-party model weights or vehicle/design imagery. Review the existing provenance and permissions before redistribution.
-- Earlier phase reports describe the state at their dates. Current runtime instructions live in [Setup](docs/SETUP.md); branch histories and delivery checksums belong in [Delivery](DELIVERY.md).
+- Older repository revisions and independently deployed copies may still contain withdrawn records; see [Data policy](docs/DATA_POLICY.md).
 
 </details>

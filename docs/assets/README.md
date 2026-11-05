@@ -1,15 +1,7 @@
-# Application screenshots
+# صور الواجهة
 
-These JPEGs were captured from the running local application on 2 November 2026, using the unified `main` source at commit `3fdec0972ea46525c1fa5be1143ab8b19bb9cd3e`.
+الملفات الثلاثة `home-screen.jpg` و`listings-screen.jpg` و`market-screen.jpg` لقطات شاشة محفوظة من واجهة المشروع خلال التطوير.
 
-| File | Actual view |
-|---|---|
-| `home-screen.jpg` | Full home page with the six service cards |
-| `listings-screen.jpg` | Historical explorer filtered to Toyota Camry, 2020, SAR 84,500; one matching record and the bundled sample image |
-| `market-screen.jpg` | Descriptive dashboard over the historical data |
+تُحفظ هذه الصور لتوثيق التصميم، وليست مجموعة صور إعلانات مستقلة. قد تتضمن لقطات التصفح والتحليل أرقامًا أو عناصر من بيانات قديمة، ولذلك لا ينبغي التعامل معها كمصدر بيانات للنسخة العامة الحالية. يجب التحقق من حقوق العناصر الظاهرة قبل إعادة استخدام الصور خارج سياق التوثيق.
 
-Capture viewport: 1280 × 720; full-page images include content below the fold. No application styles or data were changed for the captures. The guest name is a generic test label. The listing price is recorded data, not a model prediction. No inference results were added to the images.
-
-These are screenshots of the local UI, not standalone design reference images. They do not prove that a model service is connected to the public deployment, and that deployment may differ from current main.
-
-Existing design assets and the sample photo retain their original provenance and permissions. Cairo's license remains in `frontend/public/fonts/OFL.txt`; no additional redistribution license is asserted for the screenshots' underlying vehicle/design imagery.
+يحمل الخط Cairo ترخيصه في `frontend/public/fonts/OFL.txt`.

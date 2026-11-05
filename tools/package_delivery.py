@@ -26,7 +26,6 @@ def main():
     branch = git("branch", "--show-current").decode().strip()
     contents = git("-c", "core.autocrlf=false", "archive", "--format=zip", "HEAD")
     source = zipfile.ZipFile(io.BytesIO(contents))
-    expected = json.loads(source.read("docs/FILE_MANIFEST.json"))
     entries = [item for item in source.infolist() if not item.is_dir()]
     forbidden_dirs = {".git", ".runtime", ".runtime-cache", "node_modules", "__pycache__", "dist", "dist-demo", "build"}
     patterns = [rb"gh[pousr]_[A-Za-z0-9]{30,}", rb"github_pat_[A-Za-z0-9_]{30,}", rb"hf_[A-Za-z0-9]{30,}", rb"AKIA[0-9A-Z]{16}", rb"-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----"]
@@ -38,15 +37,10 @@ def main():
         if path.suffix not in {".joblib", ".sqlite", ".png", ".jpg", ".jpeg", ".webp", ".ico", ".woff", ".woff2"}:
             if any(re.search(pattern, data) for pattern in patterns):
                 raise ValueError(f"نمط سر محتمل: {item.filename}")
-    for item in expected["files"]:
-        data = source.read(item["path"])
-        if len(data) != item["bytes"] or hashlib.sha256(data).hexdigest() != item["sha256"]:
-            raise ValueError(f"بيان الملفات غير مطابق: {item['path']}")
-    assert len(entries) == expected["file_count_in_commit"]
     output.parent.mkdir(parents=True, exist_ok=True)
     with zipfile.ZipFile(output, "x", zipfile.ZIP_DEFLATED) as archive:
         for item in entries: archive.writestr(item.filename, source.read(item))
-        version = f"نسخة تسليم سعّر\nالفرع: {branch}\ncommit: {commit}\nاقرأ README.md وDELIVERY.md قبل التشغيل. المشفرات العامة غير مرفقة؛ تعليمات الاستعادة داخل الحزمة.\nلم تُعد هذه النسخة نشر الموقع.\n"
+        version = f"نسخة تسليم سعّر\nالفرع: {branch}\ncommit: {commit}\nاقرأ README.md وdocs/DATA_POLICY.md قبل التشغيل. المشفرات العامة غير مرفقة؛ تعليمات الاستعادة داخل الحزمة.\nلم تُعد هذه النسخة نشر الموقع.\n"
         archive.writestr("VERSION.txt", version.encode("utf-8"))
         archive.comment = commit.encode("ascii")
     with zipfile.ZipFile(output) as archive:

@@ -492,7 +492,7 @@ function FallingNightFlowers() {
           left: `${(index * 37 + 3) % 100}%`,
           width: `${20 + ((index * 13) % 22)}px`,
           top: `${-12 + ((index * 47) % 105)}vh`,
-          animation: `siyarad-flower-rain ${2.5 + ((index * 7) % 15) / 10}s ease-in ${((index * 11) % 8) / 10}s both`,
+          animation: `saer-flower-rain ${2.5 + ((index * 7) % 15) / 10}s ease-in ${((index * 11) % 8) / 10}s both`,
           "--flower-drift": `${((index * 19) % 151) - 75}px`,
         } as CSSProperties;
         return <span className="falling-night-flower" key={index} style={style}><img src={flowerImage} alt="" /></span>;
