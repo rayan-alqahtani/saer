@@ -3,7 +3,7 @@ export const APP_BRAND_MARK = "/ui/saer-header.png";
 export const APP_LOGO = "/ui/saer-logo.png";
 
 // يمكن ضبط رابط API وقت البناء أو تمريره عبر ?api= دون إعادة بناء الواجهة.
-export const API_BASE_URL = import.meta.env.VITE_GRADIO_SPACE_URL || import.meta.env.VITE_API_BASE_URL || "";
+export const API_BASE_URL = import.meta.env.VITE_GRADIO_SPACE_URL || import.meta.env.VITE_API_BASE_URL || "https://rayan18q-bot--saer-backend-web.us-east.modal.run";
 // مصدر JSON ثابت اختياري. يدعم ملف JSON عادي أو Gist API عام.
 export const API_CONFIG_URL = import.meta.env.VITE_API_CONFIG_URL || "";
 
@@ -107,7 +107,7 @@ async function fetchConfiguredApi(configUrl: string): Promise<string> {
 
   configFetch = (async () => {
     const freshUrl = new URL(configUrl);
-    // Defeat intermediary caches so a restarted Kaggle tunnel is picked up promptly.
+    // Avoid caching external API configuration changes.
     freshUrl.searchParams.set("_saer", String(Math.floor(Date.now() / CONFIG_CACHE_MS)));
     const response = await fetch(freshUrl.toString(), {
       cache: "no-store",
