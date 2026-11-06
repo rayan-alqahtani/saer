@@ -10,17 +10,16 @@
 
 ## 🎬 شاهد مشروع سعّر
 
-<p align="center">
-  <a href="docs/assets/saer-demo.mp4">
-    <img src="docs/assets/readme-hero.png"
-         width="100%"
-         alt="شاهد الفيديو التعريفي لمشروع سعّر" />
-  </a>
-</p>
+## 🎬 الفيديو التعريفي لمشروع سعّر
 
-<p align="center">
-  <strong>اضغط على الصورة لمشاهدة الفيديو التعريفي للمشروع (60 ثانية)</strong>
-</p>
+
+
+https://github.com/user-attachments/assets/4022646f-3af4-434e-b836-192c697e3bb9
+
+
+
+
+
   
 <br>
 
