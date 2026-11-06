@@ -10,20 +10,20 @@ pinned: false
 
 هذه ملفات خدمة Gradio. الاستضافة المستخدمة حاليًا للموقع العام هي Modal؛ وتعليمات Space وKaggle أدناه بدائل تاريخية أو اختيارية. لا تتضمن الأوزان الخاصة أو بيانات المشروع؛ تُحمّل الأوزان المعتمدة من مستودع Hugging Face خاص عند بدء المساحة. تُجلب أوزان DINOv2 وCLIP وResNet وSSDLite العامة من مصادرها عند التشغيل، ولا تدخل ضمن حزمة الأصول الخاصة. لا تستخدم هذه الحزمة لتدريب النماذج.
 
-## تشغيل بديل عبر Kaggle (ليس الاستضافة الحالية)
+## الاستضافة الحالية: Modal
 
-إذا لم يكن Gradio Space متاحاً على حساب Hugging Face دون خطة مدفوعة، استخدم الحزمة الجاهزة `C:\car_handoff\kaggle_deployment\saer-backend-bundle.zip` والدفتر `kaggle_server.ipynb`. اجعل Kaggle Dataset خاصاً، وارفع ZIP، ثم فعّل Internet وGPU وشغّل الدفتر. يقرأ `LOCAL_ASSETS_DIR` الملفات الخاصة المحلية أولاً، لذلك لا يحتاج هذا المسار إلى `HF_TOKEN` أو مستودع Hugging Face خاص.
+التطبيق العام متصل بخدمة النماذج على Modal، وليس بدفتر Kaggle. رابط الخدمة وإعدادات الربط موثقة في [دليل النشر](../docs/DEPLOYMENT.md). لا يعني تعديل هذا المجلد إعادة نشر التطبيق على Modal تلقائيًا؛ يلزم استخدام مشروع النشر المحلي الذي يحتوي متطلبات وأصول التشغيل، دون رفع الأوزان الخاصة أو أسرار الحساب إلى GitHub.
 
-يدعم `app.py` تشغيل رابط Gradio Share عبر `launch_gradio_share()` أو `SAER_GRADIO_SHARE=1 python app.py`. يدعم الدفتر أيضاً خيار Cloudflare Tunnel كبديل. الروابط عامة ومؤقتة، وتتوقف عند انتهاء جلسة Kaggle.
+## Hugging Face Space (خيار منفصل غير مستخدم في النشر الحالي)
 
-## الإعداد المطلوب في Space
+
 
 1. أنشئ مستودع Model خاصاً وارفع إليه محتويات `private_assets_to_upload` كما هي مع الحفاظ على بنية المجلدات.
 2. في Space > Settings، أضف Secret باسم `HF_TOKEN` بقيمة رمز قراءة فقط، وVariable باسم `HF_MODEL_REPO` وقيمته `namespace/private-model-repo`.
 3. أضف Variable باسم `FRONTEND_ORIGINS` يحتوي أصل Cloudflare Pages الفعلي، مثل `https://project.pages.dev`، ويمكن إضافة أصل المعاينة عند الحاجة. تُضاف عناوين localhost للتجربة تلقائياً. لا تستخدم `*`.
 4. اختر Gradio SDK وZeroGPU من إعدادات المساحة. لا تضع أي Secret في ملفات المشروع أو سجل Git.
 
-يستخدم `HF_TOKEN` لتنزيل ملفات محددة من المستودع الخاص عبر `snapshot_download` فقط. لا يرفع التطبيق ملفات أو مدخلات إلى ذلك المستودع. شيفرة Space عامة؛ لذلك لا تضع فيها أوزاناً خاصة. مجلد `C:\car_handoff\private_assets_to_upload` يحتوي ستة ملفات خاصة فقط؛ قائمة الأحجام والبصمات محفوظة منفصلة في `C:\car_handoff\private_assets_manifest.json`.
+يستخدم `HF_TOKEN` لتنزيل ملفات محددة من المستودع الخاص عبر `snapshot_download` فقط. لا يرفع التطبيق ملفات أو مدخلات إلى ذلك المستودع. شيفرة Space عامة؛ لذلك لا تضع فيها أوزاناً خاصة. تُحفظ الملفات الخاصة وبيان بصماتها خارج المستودع العام.
 
 ## نقاط API
 
@@ -38,8 +38,6 @@ pinned: false
 استخدم Python 3.12.12. يثبّت Space حزم Gradio وZeroGPU SDK التي تديرها المنصة؛ ثبّت `requirements.txt` للتبعيات المثبتة، ثم `gradio` و`spaces` للتشغيل المحلي فقط. اضبط `HF_MODEL_REPO` و`HF_TOKEN` في متغيرات البيئة، واضبط `SAER_APP_ROOT` إلى مجلد `hf_backend` عند تشغيل `python app.py`. يفضّل أن يكون `HF_TOKEN` رمز قراءة للمستودع الخاص فقط.
 
 يستخدم الموقع المنشور Modal افتراضيًا. لتجربة Space بديل افتح الموقع مع `?api=https://<space-name>.hf.space`. تحفظ الواجهة الرابط في `sessionStorage` لهذه الجلسة؛ لا يلزم إعادة بناء ملفات Cloudflare عند تبديل رابط Space أو Tunnel.
-
-لخادم Kaggle: يدعم بناء الواجهة أيضاً `?apiConfig=<رابط JSON عام>`، ويمكن أن يكون الرابط واجهة Gist API عامة فيها ملف JSON يحتوي `api_base_url`. يحدث الدفتر هذا الملف عند إعادة تشغيل النفق؛ لذلك يبقى رابط Pages ثابتاً. يرسل عميل الواجهة ترويسة `ngrok-skip-browser-warning` إلى نطاقات ngrok المعروفة. النطاق المجاني الذي يعيّنه ngrok للحساب ثابت الاسم (حالياً `ngrok-free.dev`) وليس اسماً مخصصاً يختاره المستخدم. ثبات الرابط لا يبقي خادم Kaggle عاملاً عند توقف الجلسة.
 
 ## حدود التشغيل
 
