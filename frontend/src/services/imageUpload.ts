@@ -3,7 +3,7 @@ export function validateImage(file?: File): asserts file is File {
   if (!['image/jpeg','image/png','image/webp'].includes(file.type))
     throw new Error('اختر صورة بصيغة JPG أو PNG أو WebP.');
   if (!file.size) throw new Error('ملف الصورة فارغ. اختر صورة صالحة.');
-  if (file.size > 12 * 1024 * 1024) throw new Error('حجم الصورة أكبر من 12 ميجابايت. اختر صورة أصغر.');
+  if (file.size > 15 * 1024 * 1024) throw new Error('حجم الصورة أكبر من 15 ميجابايت. اختر صورة أصغر.');
 }
 
 export async function prepareImage(file?: File): Promise<string> {
