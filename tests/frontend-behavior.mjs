@@ -62,7 +62,7 @@ test('prepareImage validates MIME, size and decoding and revokes failed URL', as
   globalThis.Image=class {naturalWidth=10;naturalHeight=10;async decode(){throw Error('invalid')}};
   try {
     await assert.rejects(prepare.prepareImage({type:'text/plain',size:1}),/اختر صورة/);
-    await assert.rejects(prepare.prepareImage({type:'image/png',size:12*1024*1024+1}),/12/);
+    await assert.rejects(prepare.prepareImage({type:'image/png',size:15*1024*1024+1}),/15/);
     assert.equal(created,0);
     await assert.rejects(prepare.prepareImage({type:'image/png',size:1}),/تعذّر فتح الصورة/);
     assert.deepEqual(revoked,['blob:1']);

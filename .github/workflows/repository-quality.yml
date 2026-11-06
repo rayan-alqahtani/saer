@@ -1,0 +1,43 @@
+name: Repository quality checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.25.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: pnpm
+          cache-dependency-path: frontend/pnpm-lock.yaml
+      - name: Install frontend
+        run: pnpm --dir frontend install --frozen-lockfile
+      - name: Type-check and build frontend
+        run: pnpm --dir frontend build
+      - name: Frontend behavior tests
+        run: node --test tests/frontend-behavior.mjs
+
+  python-contracts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile Python sources
+        run: python -m compileall -q backend hf_backend scripts tools tests
+      - name: Install lightweight test requirements
+        run: python -m pip install Pillow fastapi python-multipart
+      - name: Verify Gradio image contract and REST guards
+        run: python -m unittest discover -s tests -p test_single_image_upload.py -v
