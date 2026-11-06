@@ -22,14 +22,17 @@ class SingleImageUploadTests(unittest.TestCase):
         exec(compile(ast.fix_missing_locations(module), str(path), "exec"), context)
         return context
 
-    def test_gradio_rejects_multiple_missing_and_invalid_before_inference(self):
+    def test_gradio_rejects_missing_out_of_range_and_invalid_before_inference(self):
         calls = []
         context = self.functions("hf_backend/app.py", {"_valid_image_path", "estimate_image_price", "identify_vehicle"}, {
             "Path": Path, "_startup_error": None,
             "services": SimpleNamespace(predict_image_price=lambda *args: calls.append(args)),
         })
-        for bad in ([], ["a", "b"]):
-            with self.assertRaisesRegex(ValueError, "صورة واحدة"):
+        for bad in ([], ["a"] * 9):
+            with self.assertRaisesRegex(ValueError, "من صورة واحدة إلى 8 صور"):
+                context["estimate_image_price"](bad)
+        for bad in (None, "", ["a", "b"]):
+            with self.assertRaises(ValueError):
                 context["estimate_image_price"](bad)
         for bad in (None, "", ["a", "b"]):
             with self.assertRaises(ValueError):
@@ -44,13 +47,16 @@ class SingleImageUploadTests(unittest.TestCase):
             self.assertEqual(context["_valid_image_path"](str(path)), path)
         self.assertEqual(calls, [])
 
-    def test_both_gradio_components_are_single(self):
+    def test_gradio_inputs_match_live_frontend_contract(self):
         tree = ast.parse((ROOT / "hf_backend/app.py").read_text(encoding="utf-8"))
         files = [node for node in ast.walk(tree) if isinstance(node, ast.Assign) and any(isinstance(t, ast.Name) and t.id in {"price_files", "identity_file"} for t in node.targets)]
         self.assertEqual(len(files), 2)
-        for node in files:
+        by_name = {next(t.id for t in node.targets if isinstance(t, ast.Name) and t.id in {"price_files", "identity_file"}): node for node in files}
+        for name, expected_count in (("identity_file", "single"), ("price_files", "multiple")):
+            node = by_name[name]
             keywords = {kw.arg: ast.literal_eval(kw.value) for kw in node.value.keywords}
-            self.assertEqual(keywords.get("file_count", "single"), "single")
+            self.assertEqual(keywords.get("file_count", "single"), expected_count)
+            self.assertIsNone(keywords.get("file_types"), "Gradio must defer image validation to Pillow")
 
     def test_rest_rejects_repeated_file_fields(self):
         from fastapi import HTTPException, File
