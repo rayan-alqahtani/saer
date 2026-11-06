@@ -33,7 +33,7 @@
 </div>
 
 > [!IMPORTANT]
-> **نسخة أكاديمية تجريبية، وليست خدمة تسعير تجارية.** لا تتضمن النسخة العامة سجلات الإعلانات الأصلية أو صورها. نتائج النماذج تقديرية وليست أسعار بيع مضمونة. يعمل الرابط المنشور كواجهة ثابتة على Cloudflare Pages؛ أما التنبؤات فتتطلب خدمة Python منفصلة قيد التشغيل. قد تختلف نسخة الموقع المنشورة عن آخر تحديث في هذا المستودع.
+> **نسخة أكاديمية تجريبية، وليست خدمة تسعير تجارية.** لا تتضمن النسخة العامة سجلات الإعلانات الأصلية أو صورها. نتائج النماذج تقديرية وليست أسعار بيع مضمونة. يعمل الموقع العام على Cloudflare Pages ويتصل بخدمة النماذج على Modal. اختُبرت المسارات الثلاثة على الموقع في 6 نوفمبر 2026؛ وقد يتأخر أول طلب بسبب بدء الحاوية أو تتوقف الخدمة عند بلوغ حدود الرصيد. **قد تختلف الأصول والبيانات المنشورة عن الملفات المتاحة في هذا المستودع العام.**
 
 ---
 
@@ -102,7 +102,8 @@
 
 تعرض مؤشرات النماذج القديمة في الملفات المرجعية للسياق البحثي، وليست اختبارًا على البيانات التي يتيحها هذا المستودع الآن. لا يمكن إعادة إنتاج التقييم الأصلي دون البيانات وحقوق استخدامها.
 
----|---:|:---|
+| المقياس | القيمة | التوضيح |
+|:---|---:|:---|
 | **MedAPE** | **10.66%** | وسيط نسبة الخطأ المطلق |
 | **MAE** | **15,910.23 ر.س** | متوسط الخطأ المطلق بالريال |
 | **R²** | **0.8476** | جودة الملاءمة على مجموعة الاختبار المحددة |
@@ -126,7 +127,7 @@
 | السعر من الصورة | **87,053.29 ر.س** |
 | التعرف على المركبة | **Toyota Camry** |
 
-هذه أمثلة تاريخية من جلسات اختبار محلية، وليست نتائج اختبار جديدة على بيانات النسخة العامة أو إثباتًا لاتصال النماذج بموقع Cloudflare المنشور.
+هذه أمثلة تاريخية من جلسات اختبار محلية، وليست قياسات جديدة للدقة. أُجري اختبار وظيفي مستقل للنماذج الثلاثة على الموقع المنشور في 6 نوفمبر 2026.
 
 ---
 
@@ -150,7 +151,7 @@
 flowchart LR
     A["المستخدم · واجهة RTL"] --> B["React + TypeScript"]
     B --> C["بيانات مصرّح بها · JSON / SQLite"]
-    B -. "عند تشغيل الخدمة" .-> D["Python · FastAPI / Gradio"]
+    B --> D["Modal · Python · FastAPI / Gradio"]
     D --> E["01 · تسعير المواصفات"]
     D --> F["02 · تسعير الصورة"]
     D --> G["03 · التعرف على السيارة"]
@@ -166,8 +167,9 @@ flowchart LR
 | **Machine Learning** | scikit-learn · PyTorch · Transformers |
 | **Data** | SQLite · CSV · JSON |
 | **Static hosting** | Cloudflare Pages |
+| **Inference hosting** | Modal (CPU; scales to zero) |
 
-**حدود النشر:** Cloudflare Pages يستضيف الواجهة والملفات الثابتة فقط، وليس أوزان النماذج أو خدمة Python. تشغيل التنبؤ يتطلب إعداد الخدمة بشكل مستقل، وقد لا يكون متاحًا على الرابط العام في كل وقت.
+**النشر الحالي:** الواجهة على Cloudflare Pages والنماذج الثلاثة على Modal. قد يطول الطلب الأول عند بدء الحاوية ويعتمد استمرار الخدمة على الرصيد. [دليل النشر](docs/DEPLOYMENT.md).
 
 ---
 
@@ -211,7 +213,7 @@ With the frontend still running, open:
 
 The first encoder restore needs internet access and disk space. After restoration, the launch script verifies the cache and starts offline inference. It reports an error when assets or the service are unavailable; it does not substitute saved predictions.
 
-**[دليل التشغيل](docs/SETUP.md)** يوضح تثبيت الواجهة وتشغيلها دون نشر بيانات خارجية. The tested platform is Windows x64 with 16 GB RAM; other platforms and GPU configurations have not been verified with these locks.
+**[دليل التشغيل](docs/SETUP.md)** يوضح تثبيت الواجهة وتشغيلها دون نشر بيانات خارجية. [دليل Cloudflare وModal](docs/DEPLOYMENT.md) يشرح إعداد الربط وفروق النسخة العامة عن ملفات النشر. The tested platform is Windows x64 with 16 GB RAM; other platforms and GPU configurations have not been verified with these locks.
 
 <a name="team"></a>
 
