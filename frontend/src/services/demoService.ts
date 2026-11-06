@@ -207,7 +207,7 @@ async function gradioClient(): Promise<Client> {
       connectedApiUrl = "";
       clientPromise = undefined;
       const detail = error instanceof Error ? error.message : String(error);
-      throw new Error(`تعذر الاتصال بخدمة النماذج. تأكد من تشغيل جلسة Kaggle وصلاحية رابط الخادم، ثم أعد المحاولة. (${detail})`);
+      throw new Error(`تعذر الاتصال بخدمة النماذج. تحقق من توفر خدمة النماذج والرابط، ثم أعد المحاولة. (${detail})`);
     });
   }
   return clientPromise!;
