@@ -14,7 +14,7 @@
 
 <br>
 
-<a href="https://saer-rmsavg637.pages.dev/"><img alt="Explore the interface" src="https://img.shields.io/badge/🌐_استكشف_المنصة-OPEN_DEMO-13BCE8?style=for-the-badge&labelColor=10233F" /></a>
+<a href="https://saer-rmsavg637.pages.dev/" title="افتح النسخة الحية من سعّر — النماذج تعمل عبر Modal"><img alt="فتح منصة سعّر الحية — Cloudflare Pages + Modal" src="https://img.shields.io/badge/🌐_منصة_سعّر-LIVE_DEMO-13BCE8?style=for-the-badge&labelColor=10233F" /></a>
 <a href="docs/SETUP.md"><img alt="Setup instructions" src="https://img.shields.io/badge/⚙️_التشغيل-SETUP_GUIDE-256AB0?style=for-the-badge&labelColor=10233F" /></a>
 <a href="#-نتائج-النماذج--model-results"><img alt="Model evaluation" src="https://img.shields.io/badge/📈_نتائج_النماذج-TEST_METRICS-17A398?style=for-the-badge&labelColor=10233F" /></a>
 
