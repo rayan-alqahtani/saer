@@ -233,7 +233,7 @@ The first encoder restore needs internet access and disk space. After restoratio
 ## 👥 فريق التطوير | The Team
 
 - ريان القحطاني
-- محمد ال حمود
+- محمد اّل حمود
 - عبد الرحمن الاسمري
 
 ## 🗂️ دليل المستودع | Repository Guide
