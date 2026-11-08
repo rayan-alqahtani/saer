@@ -195,7 +195,7 @@ flowchart LR
 From a fresh clone, in **PowerShell**. Tested with Node **24.22.1** and pnpm **11.25.0**:
 
 ```powershell
-git clone https://github.com/rayan18q-bot/saer.git
+git clone https://github.com/rayan-qh/saer.git
 cd saer
 pnpm --dir frontend install --frozen-lockfile
 Copy-Item frontend/.env.example frontend/.env.local
