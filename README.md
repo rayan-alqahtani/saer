@@ -115,6 +115,15 @@ https://github.com/user-attachments/assets/4022646f-3af4-434e-b836-192c697e3bb9
 
 تعرض مؤشرات النماذج القديمة في الملفات المرجعية للسياق البحثي، وليست اختبارًا على البيانات التي يتيحها هذا المستودع الآن. لا يمكن إعادة إنتاج التقييم الأصلي دون البيانات وحقوق استخدامها.
 
+<a id="recognition-evaluation"></a>
+### What does 94.58% Top-1 recognition mean?
+
+SAER's image recognition component predicts a **vehicle make-and-model combination** from a photo. **Top-1 accuracy** measures how often the model's first predicted combination matches the labeled combination on the test images.
+
+The approved **DINOv2 + CLIP joint make/model model** recorded **0.9457627118644067**, or **94.576% ≈ 94.58%**, in a **historical test split covering 59 make/model classes**. The same split was used during earlier development rounds; this is **not an independent external validation** and **not a vehicle price-prediction accuracy measure**.
+
+For the exact source values and limitations, see the [approved identity evaluation record](models/identity_current.json).
+
 | المقياس | القيمة | التوضيح |
 |:---|---:|:---|
 | **MedAPE** | **10.66%** | وسيط نسبة الخطأ المطلق |
